@@ -23,19 +23,15 @@ public class XMLParserTest {
 		String testQuery = testParser.buildXPathQuery("name", "Voidwalk");
 		assertEquals("//card[name='Voidwalk']/*", testQuery);
 	}
-	/*
-	@Test
-	public void testToGetCardNameFromValidQuery() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-		XMLParser testParser = new XMLParser();
-		assertEquals("Voidwalk", testParser.searchXML("//cards/card[name='Voidwalk']/name/text()"));
-	}
+	
+
 	
 	@Test(expected=XPathExpressionException.class)
 	public void testForInvalidSearch() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 		XMLParser testParser = new XMLParser();
 		testParser.searchXML("//cards/card[sriram='thecoolest']/garbage/text()");
 			}
-	*/
+	
 	 
 	@Test
 	public void testForSearchingForACardByName() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{

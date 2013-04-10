@@ -47,12 +47,11 @@ public class XMLParser {
 		Object result = expr.evaluate(doc, XPathConstants.NODESET);
 		
 		NodeList nodes = (NodeList) result;
-		
 		ArrayList<MTGCard> searchResults = populateListOfCards(nodes);
 		
 		
 		
-		if(result.equals("")){
+		if(nodes.getLength()==0){
 			throw new XPathExpressionException("Invalid XPath Query");
 		}
 		else{
