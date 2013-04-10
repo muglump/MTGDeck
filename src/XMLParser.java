@@ -17,11 +17,8 @@ import org.xml.sax.SAXException;
 public class XMLParser {
 
 	
-	private HashMap<String, MTGCard> cards;
-
 	public XMLParser(){
-		HashMap<String, MTGCard> cards = new HashMap<String, MTGCard>();
-		this.cards = cards;
+	
 	}
 	
 	public String buildXPathQuery(String searchType, String searchTerm, String searchResultType) {
@@ -31,7 +28,7 @@ public class XMLParser {
 		return query;
 		
 	}
-
+	
 	public String parseXML(String query) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		
 		
@@ -53,11 +50,6 @@ public class XMLParser {
 		}
 	}
 
-	public HashMap<String, MTGCard> getHash() {
-		// TODO Auto-generated method stub
-		return this.cards;
-	}
-	
-	
+
 
 }

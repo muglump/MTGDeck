@@ -34,11 +34,5 @@ public class XMLParserTest {
 		testParser.parseXML("//cards/card[sriram='thecoolest']/garbage/text()");
 			}
 	
-	@Test
-	public void testToCheckInitialization() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
-		XMLParser testParser = new XMLParser();
-		assertTrue("Test Parser Hash has something",(testParser.getHash().isEmpty()));
-	}
-	
 
 }
