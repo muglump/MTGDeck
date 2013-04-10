@@ -7,17 +7,32 @@ public class MTGCard {
  public String type;
  public String power;
  public String toughness;
- public ArrayList<String> sets;
- public String description;
+ public String sets;
+ public String rules;
  
- public MTGCard(String newName, String newcastingCost, String newtype, String newpower, String newtoughness, ArrayList<String> newsets, String newdescription){
+ 
+ public MTGCard(){
+	 name="";
+	 castingCost="";
+	 type="";
+	 power="";
+	 toughness="";
+	 sets="";
+	 rules="";
+ }
+ 
+ public MTGCard(String newName, String newcastingCost, String newtype, String newpower, String newtoughness, String newsets, String newrules){
 	 this.name = newName;
 	 this.castingCost = newcastingCost;
 	 this.type = newtype;
 	 this.power = newpower;
 	 this.toughness = newtoughness;
 	 this.sets = newsets;
-	 this.description = newdescription;
+	 this.rules = newrules;
+ }
+ 
+ public String toString(){
+	 return "Name " + name + " castingCost " + castingCost + " type " + type + " power " + power + " toughness " + toughness + " rules " + rules + " sets " + sets; 
  }
  
  

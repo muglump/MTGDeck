@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
@@ -19,20 +20,35 @@ public class XMLParserTest {
 	@Test
 	public void testToGetCorrectXPathQuery() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
 		XMLParser testParser = new XMLParser();
-		assertEquals("//cards/card[name='Voidwalk']/name/text()", testParser.buildXPathQuery("name", "Voidwalk", "name"));
+		String testQuery = testParser.buildXPathQuery("name", "Voidwalk");
+		assertEquals("//card[name='Voidwalk']/*", testQuery);
 	}
-	
+	/*
 	@Test
 	public void testToGetCardNameFromValidQuery() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
 		XMLParser testParser = new XMLParser();
-		assertEquals("Voidwalk", testParser.parseXML("//cards/card[name='Voidwalk']/name/text()"));
+		assertEquals("Voidwalk", testParser.searchXML("//cards/card[name='Voidwalk']/name/text()"));
 	}
 	
 	@Test(expected=XPathExpressionException.class)
 	public void testForInvalidSearch() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 		XMLParser testParser = new XMLParser();
-		testParser.parseXML("//cards/card[sriram='thecoolest']/garbage/text()");
+		testParser.searchXML("//cards/card[sriram='thecoolest']/garbage/text()");
 			}
-	
+	*/
+	 
+	@Test
+	public void testForSearchingForACardByName() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
+		XMLParser testParser = new XMLParser();
+		ArrayList<MTGCard> cardList = testParser.searchXML("//card[name='Rancor']/*");
+		assertEquals("Rancor", cardList.get(0).name);
+	}
+
+	@Test
+	public void testForSearchingForACardByRules() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
+		XMLParser testParser = new XMLParser();
+		ArrayList<MTGCard> cardList = testParser.searchXML("//card[rules='Put two 2/2 white Knight creature tokens with vigilance onto the battlefield.']/*");
+		assertEquals("Knight Watch", cardList.get(0).name);
+	}
 
 }
