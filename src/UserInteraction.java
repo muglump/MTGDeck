@@ -30,11 +30,12 @@ public class UserInteraction {
 	
 	public void userInteraction() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		Scanner input = new Scanner(System.in);
-		
+		System.out.println("Welcome");
 		System.out.println("Choose Action: ");
 		System.out.println("Search");
 		System.out.println("Display");
 		while(input.hasNext()){
+			
 			String command = input.next().toUpperCase();
 			UserCommands u;
 			try{
@@ -50,31 +51,44 @@ public class UserInteraction {
 				this.searchCommand(input);
 				break;
 			case DISPLAY:
-				this.displayCommand(input);
+				String display = this.displayCommand();
+				System.out.println(display);
+				break;
 			}
-			break;
+			System.out.println("Choose Action: ");
+			System.out.println("Search");
+			System.out.println("Display");
+			
+			
 		}
 			
 	}
 	
 	
-	private void displayCommand(Scanner input) {
-		System.out.println("Input Card Name");
-		while(input.hasNext()){
-			String name = input.nextLine();
-			for(MTGCard card : this.searchResults){
-				if(card.name == name){
-					System.out.println(card.toString());
-					return;
-				}
-			}
-			System.out.println("Card not found");
-			break;
+	public String displayCommand() {
+		StringBuilder sb = new StringBuilder();
+		
+		if(this.searchResults.isEmpty()){
+			sb.append("No current search results");
 		}
+		else{
+			int searchResultIndex = 1;
+			for(MTGCard card : this.searchResults){
+				sb.append("Result number " + searchResultIndex +"\n");
+				sb.append(card.toString() + "\n");
+				sb.append("\n");
+				searchResultIndex++;
+			}
+		}
+		return sb.toString();
+	
 	}
 
 
 	private void searchCommand(Scanner input) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
+		
+		String searchType = "";
+		String searchTerm = "";
 		System.out.println("Choose a search type ");
 		System.out.println("Name <Term>");
 		System.out.println("Type <Term>");
@@ -83,10 +97,9 @@ public class UserInteraction {
 		System.out.println("Rules <Term>");
 		System.out.println("Cost <Term>");
 		System.out.print("> ");
-		String searchType = "";
-		String searchTerm = "";
-		
 		while(input.hasNext()){
+			
+			
 			String command = input.next();
 			command = command.toUpperCase();
 			SearchEnumeration c;
@@ -95,6 +108,14 @@ public class UserInteraction {
 			}
 			catch(IllegalArgumentException e){
 				System.out.println("Unknown command: "+ command);
+				System.out.println("Choose a search type ");
+				System.out.println("Name <Term>");
+				System.out.println("Type <Term>");
+				System.out.println("Power <Term>");
+				System.out.println("Toughness <Term>");
+				System.out.println("Rules <Term>");
+				System.out.println("Cost <Term>");
+				System.out.print("> ");
 				continue;
 			}
 		
@@ -124,7 +145,8 @@ public class UserInteraction {
 		searchTerm = input.nextLine();
 		
 		this.searchResults = search(this.parser, searchType, searchTerm);
-		input.close();
+		System.out.println("Search Concluded with "+ this.searchResults.size() + " results");
+		
 	}
 
 
@@ -142,6 +164,10 @@ public class UserInteraction {
 //getters
 	public ArrayList<MTGCard> getSearchResults() {
 		return searchResults;
+	}
+	
+	public void setSearchResults(ArrayList<MTGCard> searchResults){
+		this.searchResults = searchResults;
 	}
 
 	public XMLParser getParser() {

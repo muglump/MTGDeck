@@ -50,13 +50,8 @@ public class XMLParser {
 		ArrayList<MTGCard> searchResults = populateListOfCards(nodes);
 		
 		
+		return searchResults;
 		
-		if(nodes.getLength()==0){
-			throw new XPathExpressionException("Invalid XPath Query");
-		}
-		else{
-			return searchResults;
-		}
 	}
 
 	private ArrayList<MTGCard> populateListOfCards(NodeList nodes) {
@@ -72,17 +67,18 @@ public class XMLParser {
 		int setsNodeIndex = 19;
 		int cardNodesSize = 21;
 		
-		MTGCard currentCard = new MTGCard();
+		
 		for(int i=0; i < numberOfCards; i++){
 			
-			currentCard.name = nodes.item(nameNodeIndex + cardNodesSize*i).getTextContent();
-			currentCard.castingCost = nodes.item(costNodeIndex+cardNodesSize*i).getTextContent();
-			currentCard.type = nodes.item(typeNodeIndex+cardNodesSize*i).getTextContent();
-			currentCard.power = nodes.item(powerNodeIndex+cardNodesSize*i).getTextContent();
-			currentCard.toughness = nodes.item(toughnessNodeIndex+cardNodesSize*i).getTextContent();
-			currentCard.rules = nodes.item(rulesNodeIndex+cardNodesSize*i).getTextContent();
-			currentCard.sets = nodes.item(setsNodeIndex+cardNodesSize*i).getTextContent();
+			String name = nodes.item(nameNodeIndex + cardNodesSize*i).getTextContent();
+			String castingCost = nodes.item(costNodeIndex+cardNodesSize*i).getTextContent();
+			String type = nodes.item(typeNodeIndex+cardNodesSize*i).getTextContent();
+			String power = nodes.item(powerNodeIndex+cardNodesSize*i).getTextContent();
+			String toughness = nodes.item(toughnessNodeIndex+cardNodesSize*i).getTextContent();
+			String rules = nodes.item(rulesNodeIndex+cardNodesSize*i).getTextContent();
+			String sets = nodes.item(setsNodeIndex+cardNodesSize*i).getTextContent();
 			
+			MTGCard currentCard = new MTGCard(name, castingCost, type, power, toughness, sets, rules);
 			cards.add(currentCard);
 			
 		

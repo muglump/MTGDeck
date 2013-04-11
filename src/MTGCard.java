@@ -25,14 +25,37 @@ public class MTGCard {
 	 this.name = newName;
 	 this.castingCost = newcastingCost;
 	 this.type = newtype;
-	 this.power = newpower;
-	 this.toughness = newtoughness;
+	 try{
+		 Integer.parseInt(newpower);
+		 this.power=newpower;
+	 }
+	 catch(NumberFormatException e){
+		 if(newpower.equals("*")){
+			 this.power=newpower;
+		 }
+		 else{
+			 this.power="n/a";
+		 }
+	 }
+	 try{
+		 Integer.parseInt(newtoughness);
+		 this.toughness=newtoughness;
+	 }
+	 catch(NumberFormatException e){
+		 if(newtoughness.equals("*")){
+			 this.toughness=newtoughness;
+		 }
+		 else{
+			 this.toughness="n/a";
+		 }
+	 }
 	 this.sets = newsets;
 	 this.rules = newrules;
  }
  
  public String toString(){
-	 return "Name " + name + " castingCost " + castingCost + " type " + type + " power " + power + " toughness " + toughness + " rules " + rules + " sets " + sets; 
+	
+	 return "Name " + name + "\nCastingCost " + castingCost + "\nType " + type + "\nPower " + power + "\nToughness " + toughness + "\nRules " + rules + "\nSets " + sets; 
  }
  
  

@@ -26,10 +26,11 @@ public class XMLParserTest {
 	
 
 	
-	@Test(expected=XPathExpressionException.class)
+	@Test
 	public void testForInvalidSearch() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 		XMLParser testParser = new XMLParser();
-		testParser.searchXML("//cards/card[sriram='thecoolest']/garbage/text()");
+		ArrayList<MTGCard> testResults = testParser.searchXML("//card[name='sriram']/*");
+		assertEquals(0, testResults.size());
 			}
 	
 	 
