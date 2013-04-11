@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage[margin = 0.5in]{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{glossaries}
+\usepackage{graphicx}
+\pagenumbering{arabic}
+\onehalfspacing
+\pagestyle{fancy}
+\fancyhead[L]{MTG Deck Builder}
+\fancyhead[C]{Intermediate Status Report}
+\fancyhead[R]{4-11-2013}
+
+\begin{document}
+	\begin{titlepage}
+		\vspace*{\fill}
+		\hrulefill
+		\begin{center}
+			\section*{Intermediate Status Report}
+			\subsection*{CSSE 376}
+			\subsection*{Thomas Morris, David Savrda, Alexander White}
+			4-11-2013
+		\end{center}
+		\hrulefill
+		\vspace*{\fill}
+	\end{titlepage}
+	\newpage
+	\section*{1}
+		User must be able to add or remove a card from a deck. User must be able to display the cards in a deck. User must be able to select deck rules. If the user has chosen deck rules all additions that violate those rules must be rejected.
+	\section*{2}
+		\begin{tabular}{| l | l |} \hline
+			Test & expected result \\ \hline
+			User creates a new deck with no rules & A new deck is created \\ \hline
+			User add a card & Card added to deck \\ \hline
+			User removes a card & Card removed from deck \\ \hline
+			User creates a new deck with specific rule& New deck created \\ \hline
+			User adds valid card & Card is added to deck \\ \hline
+			User adds invalid card & Card is not added to deck \\ \hline
+			User request deck information & Deck is printed out \\ \hline
+		\end{tabular}
+	\section*{3}
+		Code coverage at approximately 60 to 70 percent . Need to consult Instructor to discuss further.
+	
+	
+\end{document}
