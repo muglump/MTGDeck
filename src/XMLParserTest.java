@@ -46,5 +46,7 @@ public class XMLParserTest {
 		ArrayList<MTGCard> cardList = testParser.searchXML("//card[rules='Put two 2/2 white Knight creature tokens with vigilance onto the battlefield.']/*");
 		assertEquals("Knight Watch", cardList.get(0).name);
 	}
+	
+	
 
 }
