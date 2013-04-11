@@ -163,7 +163,7 @@ public class UserInteraction {
 	
 //getters
 	public ArrayList<MTGCard> getSearchResults() {
-		return searchResults;
+		return this.searchResults;
 	}
 	
 	public void setSearchResults(ArrayList<MTGCard> searchResults){

@@ -11,15 +11,7 @@ public class MTGCard {
  public String rules;
  
  
- public MTGCard(){
-	 name="";
-	 castingCost="";
-	 type="";
-	 power="";
-	 toughness="";
-	 sets="";
-	 rules="";
- }
+
  
  public MTGCard(String newName, String newcastingCost, String newtype, String newpower, String newtoughness, String newsets, String newrules){
 	 this.name = newName;

@@ -23,8 +23,19 @@ public class XMLParserTest {
 		String testQuery = testParser.buildXPathQuery("name", "Voidwalk");
 		assertEquals("//card[name='Voidwalk']/*", testQuery);
 	}
+	@Test
+	public void testThatCardWithMutablePowerIsMade() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
+		XMLParser testParser = new XMLParser();
+		ArrayList<MTGCard> testResults = testParser.searchXML("//card[power='*']/*");
+		assertEquals("*", testResults.get(0).power);
+	}
 	
-
+	@Test
+	public void testThatCardWithNumberPowerIsMade() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
+		XMLParser testParser = new XMLParser();
+		ArrayList<MTGCard> testResults = testParser.searchXML("//card[power='1']/*");
+		assertEquals("1", testResults.get(0).power);
+	}
 	
 	@Test
 	public void testForInvalidSearch() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
