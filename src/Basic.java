@@ -14,6 +14,9 @@ public class Basic extends RuleSet {
 
 	@Override
 	public boolean canBeAdded(MTGCard card, Deck deck) {
+		if (deck.cards.size() == this.DeckSize){
+			return false;
+		}
 		if(card.type.contains("Land")){
 			return true;
 		}
