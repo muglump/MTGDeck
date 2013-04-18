@@ -1,4 +1,4 @@
-
+package MTG;
 public class Basic extends RuleSet {
 	public int DeckSize;
 	public Basic(){
@@ -33,3 +33,4 @@ public class Basic extends RuleSet {
 	}
 
 }
+

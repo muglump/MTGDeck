@@ -1,3 +1,4 @@
+package MTG;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -6,6 +7,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.xml.sax.SAXException;
+import Command.*;
 
 
 public class UserInteraction {
