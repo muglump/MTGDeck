@@ -22,6 +22,13 @@ public class UserInteraction {
 		NAME, TYPE, POWER, TOUGHNESS, RULES, COST, DISPLAY 
 	}
 	
+	private enum DeckEnum{
+		DISPLAY, NEW, ADD, REMOVE
+	}
+	
+	private enum Rules{
+		BASIC
+	}
 	
 	public UserInteraction() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 		this.parser = new XMLParser();
@@ -58,7 +65,7 @@ public class UserInteraction {
 				System.out.println(display);
 				break;
 			case DECK:
-				String deckReturn = this.deckCommands();
+				String deckReturn = this.deckCommands(input);
 				System.out.println(deckReturn);
 			}
 			System.out.println("Choose Action: ");
@@ -72,33 +79,50 @@ public class UserInteraction {
 	}
 	
 	
-	private String deckCommands() {
+	private String deckCommands(Scanner input) {
 		System.out.println("Choose Deck Command");
-		return null;
-	}
-
-
-	public String displayCommand() {
-		StringBuilder sb = new StringBuilder();
-		
-		if(this.searchResults.isEmpty()){
-			sb.append("No current search results");
-		}
-		else{
-			int searchResultIndex = 1;
-			for(MTGCard card : this.searchResults){
-				sb.append("Result number " + searchResultIndex +"\n");
-				sb.append(card.toString() + "\n");
-				sb.append("\n");
-				searchResultIndex++;
+		System.out.println("New");
+		System.out.println("Display");
+		System.out.println("Add <Name>");
+		System.out.println("Remove <Name>");
+		String result = " ";
+		while(input.hasNext()){
+			String command = input.next();
+			command = command.toUpperCase();
+			DeckEnum c;
+			try {
+				c = DeckEnum.valueOf(command);
 			}
+			catch(IllegalArgumentException e){
+				System.out.println("Unknown command: "+ command);
+				System.out.println("Choose Deck Command");
+				System.out.println("New");
+				System.out.println("Display");
+				System.out.println("Add <Name>");
+				System.out.println("Remove <Name>");
+				continue;
+			}
+			
+			switch(c){
+			case DISPLAY:
+				result = this.currentDeck.toString();
+			case NEW:
+				result = newDeck(input);
+			case ADD:
+				result = addCard(input);
+			case REMOVE:
+				result = removeCard(input);
+			}
+			
 		}
-		return sb.toString();
-	
+		return result;
 	}
+	
+private boolean newDeck(Scanner input){
+	return true;
+}
 
-
-	private void searchCommand(Scanner input) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
+private void searchCommand(Scanner input) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 		
 		String searchType = "";
 		String searchTerm = "";
@@ -161,6 +185,27 @@ public class UserInteraction {
 		System.out.println("Search Concluded with "+ this.searchResults.size() + " results");
 		
 	}
+	public String displayCommand() {
+		StringBuilder sb = new StringBuilder();
+		
+		if(this.searchResults.isEmpty()){
+			sb.append("No current search results");
+		}
+		else{
+			int searchResultIndex = 1;
+			for(MTGCard card : this.searchResults){
+				sb.append("Result number " + searchResultIndex +"\n");
+				sb.append(card.toString() + "\n");
+				sb.append("\n");
+				searchResultIndex++;
+			}
+		}
+		return sb.toString();
+	
+	}
+
+
+	
 
 
 	public static ArrayList<MTGCard> search(XMLParser parser,
