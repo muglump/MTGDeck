@@ -1,3 +1,4 @@
+package MTG;
 import java.util.ArrayList;
 
 
@@ -7,3 +8,4 @@ public abstract class RuleSet {
 	public abstract boolean DeckValid(Deck deck);
 	public abstract boolean canBeAdded(MTGCard card, Deck deck);
 }
+

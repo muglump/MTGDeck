@@ -1,7 +1,5 @@
+package MTG;
 import java.util.ArrayList;
-
-
-
 
 
 class Deck {
