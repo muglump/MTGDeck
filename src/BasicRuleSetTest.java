@@ -4,16 +4,16 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 
-public class BasicTest {
+public class BasicRuleSetTest {
 
 	@Test
 	public void testBasicNotNull() {
-		Basic test = new Basic();
+		BasicRuleSet test = new BasicRuleSet();
 		Assert.assertNotNull(test);
 	}
 	
 	@Test public void testBasicHasCorrectDeckLimit(){
-		Basic test = new Basic();
+		BasicRuleSet test = new BasicRuleSet();
 		Assert.assertEquals(60, test.DeckSize);
 	}
 

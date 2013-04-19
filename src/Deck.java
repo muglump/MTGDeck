@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 
 
-
-
-
 class Deck {
 	private enum Rules{
 		BASIC
@@ -12,12 +9,13 @@ class Deck {
 	public RuleSet rules;
 	public Deck(){
 		this.cards = new ArrayList<MTGCard>();
-		this.rules = new Basic();
+		this.rules = new BasicRuleSet();
 	}
 	public Deck(String rule){
 		this.cards = new ArrayList<MTGCard>();
 		this.rules = determineRules(rule);
 	}
+	
 	private RuleSet determineRules(String rule) {
 		String rules = rule.toUpperCase();
 		RuleSet ruleSet = null;
@@ -32,33 +30,50 @@ class Deck {
 		
 		switch(r){
 		case BASIC:
-			ruleSet = new Basic();
+			ruleSet = new BasicRuleSet();
+			break;
 		}
 		return ruleSet;
 	}
 	
 	public boolean addCardToDeck(MTGCard card){
 		boolean valid = rules.canBeAdded(card, this);
-		if(valid == true){
+		if(valid){
 			cards.add(card);
 			return true;
 		}
 		return false;
 	}
 	
-	public boolean removeCardFromDeck(MTGCard card){
-		return cards.remove(card);
+	public void removeCardFromDeck(MTGCard cardToRemove){
+		for(MTGCard card : this.cards){
+			if(card.equals(cardToRemove)){
+				this.cards.remove(card);
+				break;
+			}
+		}
+	}
+	
+	@Override
+	public String toString(){
+		if(this.cards.isEmpty()){
+			return "No Cards currently in Deck";
+		}
+		return this.cards.toString();
+		
 	}
 	
 	public String displayDeck(){
 		String deckString = "";
+		if(this.cards.isEmpty()){
+			return "Deck Empty";
+		}
+		
 		for(MTGCard card : cards){
 			deckString = deckString + (card.toString());
 		}
 		System.out.println(deckString);
-		if(deckString == ""){
-			return "Deck Empty";
-		}
+		
 		return deckString;
 	}
 }

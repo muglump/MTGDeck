@@ -50,6 +50,9 @@ public class MTGCard {
 	 return "Name " + name + "\nCastingCost " + castingCost + "\nType " + type + "\nPower " + power + "\nToughness " + toughness + "\nRules " + rules + "\nSets " + sets; 
  }
  
- 
+ public boolean equals(MTGCard o){
+	return this.name.equals(o.name);
+	 
+ }
  
 }

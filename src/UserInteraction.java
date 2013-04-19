@@ -16,14 +16,14 @@ public class UserInteraction {
 
 
 	private enum UserCommands{
-		SEARCH, DISPLAY, DECK
+		SEARCH, DISPLAY, DECK, EXIT
 	}
 	private enum SearchEnumeration{
 		NAME, TYPE, POWER, TOUGHNESS, RULES, COST, DISPLAY 
 	}
 	
 	private enum DeckEnum{
-		DISPLAY, NEW, ADD, REMOVE
+		DISPLAY, NEW, ADD, REMOVE, EXIT
 	}
 	
 	private enum Rules{
@@ -40,10 +40,7 @@ public class UserInteraction {
 	public void userInteraction() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Welcome");
-		System.out.println("Choose Action: ");
-		System.out.println("Search");
-		System.out.println("Display");
-		System.out.println("Deck");
+		printUICommands();
 		while(input.hasNext()){
 			
 			String command = input.next().toUpperCase();
@@ -53,6 +50,7 @@ public class UserInteraction {
 			}
 			catch(IllegalArgumentException e){
 				System.out.println("Unknown command: "+command);
+				printUICommands();
 				continue;
 			}
 			
@@ -65,27 +63,32 @@ public class UserInteraction {
 				System.out.println(display);
 				break;
 			case DECK:
-				String deckReturn = this.deckCommands(input);
-				System.out.println(deckReturn);
+				this.deckCommands(input);
+				break;
+			case EXIT:
+				return;
+				
 			}
-			System.out.println("Choose Action: ");
-			System.out.println("Search");
-			System.out.println("Display");
-			System.out.println("Deck");
+			printUICommands();
 			
 			
 		}
 			
 	}
-	
-	
-	private String deckCommands(Scanner input) {
-		System.out.println("Choose Deck Command");
-		System.out.println("New");
+
+
+	private void printUICommands() {
+		System.out.println("Choose Action: ");
+		System.out.println("Search");
 		System.out.println("Display");
-		System.out.println("Add <Name>");
-		System.out.println("Remove <Name>");
-		String result = " ";
+		System.out.println("Deck");
+		System.out.println("Exit");
+	}
+	
+	
+	private void deckCommands(Scanner input) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
+		printDeckCommands();
+		String result = "";
 		while(input.hasNext()){
 			String command = input.next();
 			command = command.toUpperCase();
@@ -95,32 +98,115 @@ public class UserInteraction {
 			}
 			catch(IllegalArgumentException e){
 				System.out.println("Unknown command: "+ command);
-				System.out.println("Choose Deck Command");
-				System.out.println("New");
-				System.out.println("Display");
-				System.out.println("Add <Name>");
-				System.out.println("Remove <Name>");
+				printDeckCommands();
 				continue;
 			}
 			
 			switch(c){
 			case DISPLAY:
-				result = this.currentDeck.toString();
+				System.out.println(this.currentDeck);
+				break;
 			case NEW:
 				result = newDeck(input);
+				break;
 			case ADD:
-				result = addCard(input);
+				addCard(input);
+				break;
 			case REMOVE:
-				result = removeCard(input);
+				removeCard(input);
+				break;
+			case EXIT:
+				return;
 			}
-			
+			printDeckCommands();
 		}
-		return result;
+		System.out.println(result);
+	}
+
+private String newDeck(Scanner input){
+	String result = "";
+	System.out.println("Choose RuleSet");
+	for(Rules value: Rules.values()){
+		System.out.println("    "+value);
 	}
 	
-private boolean newDeck(Scanner input){
-	return true;
+	String command = input.next();
+	command = command.toUpperCase();
+	this.currentDeck = new Deck(command);
+	result = this.currentDeck.toString();
+	
+	return result;
 }
+
+	private void addCard(Scanner input) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
+		System.out.println("Enter number to add and the card's name (Capitalization matters), type 0 to quit");
+		System.out.println("example: 4 Rancor");
+		int numberToAdd=0;
+		while(input.hasNext()){
+			String numberInput = input.next();
+			try{
+				numberToAdd = Integer.parseInt(numberInput);
+			}
+			catch(NumberFormatException e){
+				System.out.println("Please enter the number and then the card name");
+				continue;
+			}
+			if(numberToAdd == 0){
+				break;
+			}
+			input.skip(" ");
+			String cardName = input.nextLine();
+			MTGCard card = parser.searchForCardName(cardName);
+			for(int i=0; i < numberToAdd; i++){
+				this.currentDeck.addCardToDeck(card);
+			}
+			System.out.println("Card(s) Added Successfully.");
+			System.out.println("Enter number to add and the card's name (Capitalization matters), type 0 to quit");
+			System.out.println("example: 4 Rancor");
+		}
+	}
+	
+
+	private void removeCard(Scanner input) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
+
+		System.out.println("Enter number to remove and the card's name (Capitalization matters), type 0 to quit");
+		System.out.println("example: 4 Rancor");
+		int numberToRemove=0;
+		while(input.hasNext()){
+			String numberInput = input.next();
+			try{
+				numberToRemove = Integer.parseInt(numberInput);
+			}
+			catch(NumberFormatException e){
+				System.out.println("Please enter the number and then the card name");
+				continue;
+			}
+			if(numberToRemove == 0){
+				break;
+			}
+			input.skip(" ");
+			String cardName = input.nextLine();
+			MTGCard card = parser.searchForCardName(cardName);
+			for(int i=0; i < numberToRemove; i++){
+				this.currentDeck.removeCardFromDeck(card);
+			}
+			System.out.println("Card(s) Removed Successfully.");
+			System.out.println("Enter number to add and the card's name (Capitalization matters), type 0 to quit");
+			System.out.println("example: 4 Rancor");
+		}
+	}
+
+
+
+private void printDeckCommands() {
+	System.out.println("Choose Deck Command");
+	System.out.println("New");
+	System.out.println("Display");
+	System.out.println("Add");
+	System.out.println("Remove");
+	System.out.println("Exit");
+}
+
 
 private void searchCommand(Scanner input) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 		

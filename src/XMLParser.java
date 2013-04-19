@@ -24,6 +24,14 @@ public class XMLParser {
 	
 	}
 	
+	public MTGCard searchForCardName(String cardName) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
+		String query = buildXPathQuery("name", cardName);
+		ArrayList<MTGCard> listOfCards = searchXML(query);
+		
+		return listOfCards.get(0);
+		
+	}
+	
 	public String buildXPathQuery(String searchType, String searchTerm) {
 		String query = "//card["+searchType+"=\'"+searchTerm+"\']/*";
 		//example query     "//card[name='Voidwalk']/*

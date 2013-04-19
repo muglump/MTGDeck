@@ -15,14 +15,14 @@ public class DeckTest {
 	@Test
 	public void testDefualtDeckIsBasic(){
 		Deck test = new Deck();
-		RuleSet comp = new Basic();
+		RuleSet comp = new BasicRuleSet();
 		Assert.assertEquals(comp.getClass(), test.rules.getClass());
 	}
 	
 	@Test
 	public void testDeckCreationCanMakeBasic(){
 		Deck test = new Deck("Basic");
-		RuleSet comp = new Basic();
+		RuleSet comp = new BasicRuleSet();
 		Assert.assertEquals(comp.getClass(), test.rules.getClass());
 	}
 	
