@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage[margin = 0.5in]{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{glossaries}
+\usepackage{graphicx}
+\pagenumbering{arabic}
+\onehalfspacing
+\pagestyle{fancy}
+\fancyhead[L]{MTG Deck Builder}
+\fancyhead[C]{Intermediate Status Report}
+\fancyhead[R]{4-18-2013}
+
+\begin{document}
+	\begin{titlepage}
+		\vspace*{\fill}
+		\hrulefill
+		\begin{center}
+			\section*{Intermediate Status Report}
+			\subsection*{CSSE 376}
+			\subsection*{Thomas Morris, David Savrda, Alexander White}
+			4-18-2013
+		\end{center}
+		\hrulefill
+		\vspace*{\fill}
+	\end{titlepage}
+	\newpage
+	\section*{1}
+		User must be able to search within a deck. User must be able to change the rules in a populated deck. If the user does so the deck must remove any violating cards. User must be able to save decks to a file.
+	\section*{2}
+		\begin{tabular}{| l | l |} \hline
+			Test & expected result \\ \hline
+			User searches for a card that exists in the deck & All cards meeting the criteria of search terms are returned. \\ \hline
+			User searches for a card that does not exist & Returns no card found. \\ \hline
+			User switches deck rules for a populated deck, all cards valid in new rules & Deck switches rules, and returns all cards valid \\ \hline
+			User switches deck rules for  a populated deck, with cards invalid under new rules & Deck switches rules, removes all violating cards, and returns them. \\ \hline
+			User saves deck to file & Text file populated with deck rules, and all cards in deck. \\ \hline
+		\end{tabular}
+	\section*{3}
+		Code coverage at approximately 60 to 70 percent .
+	
+	
+\end{document}
