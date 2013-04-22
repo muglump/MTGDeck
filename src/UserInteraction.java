@@ -156,14 +156,26 @@ private String newDeck(Scanner input){
 			}
 			input.skip(" ");
 			String cardName = input.nextLine();
-			MTGCard card = parser.searchForCardName(cardName);
-			for(int i=0; i < numberToAdd; i++){
-				this.currentDeck.addCardToDeck(card);
-			}
-			System.out.println("Card(s) Added Successfully.");
+			int numberAdded = addCards(numberToAdd, cardName);
+			System.out.println(numberAdded + "Card(s) Added Successfully.");
 			System.out.println("Enter number to add and the card's name (Capitalization matters), type 0 to quit");
 			System.out.println("example: 4 Rancor");
 		}
+	}
+
+
+	public int addCards(int numberToAdd, String cardName)
+			throws XPathExpressionException, ParserConfigurationException,
+			SAXException, IOException {
+		MTGCard card = parser.searchForCardName(cardName);
+		for(int i=0; i < numberToAdd; i++){
+			boolean added = this.currentDeck.addCardToDeck(card);
+			if(added == false){
+				return i;
+			}
+		}
+		return numberToAdd;
+		
 	}
 	
 
