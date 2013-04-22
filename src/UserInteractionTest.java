@@ -1,3 +1,4 @@
+
 import static org.junit.Assert.*;
 
 import java.io.IOException;
@@ -26,5 +27,14 @@ public class UserInteractionTest {
 		testUI.setSearchResults(results);
 		assertEquals("Result number 1\nName Voidwalk\nCastingCost 3U\nType Sorcery\nPower n/a\nToughness n/a\nRules Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)\nSets Gatecrash Uncommon\n\n", testUI.displayCommand());
 	}
+
+	@Test
+	public void testAddCardCommand() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
+		UserInteraction testUI = new UserInteraction();
+		Deck testDeck = new Deck();
+		ArrayList<MTGCard> results = testUI.search(testUI.getParser(), "name", "Rancor");
+		assertEquals(1, testUI.addCards(1, "Rancor"));
+	}
 	
 }
+
