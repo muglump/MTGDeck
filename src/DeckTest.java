@@ -92,7 +92,7 @@ public class DeckTest {
 	@Test 
 	public void DeckCanHaveMoreThen4NonLandCards(){
 		Deck test = new Deck();
-		MTGCard testCard14 = new MTGCard("test14", "4", "Land", "4", "4", "Land", "4");
+		MTGCard testCard14 = new MTGCard("test14", "4", "Basic Land", "4", "4", "Land", "4");
 		for(int i = 0; i < 5; i++){
 			test.addCardToDeck(testCard14);
 		}

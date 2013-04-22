@@ -20,8 +20,18 @@ public class XMLParser {
 
 	
 	
-	public XMLParser(){
-	
+	private Document document;
+	private XPath xpath;
+
+	public XMLParser() throws SAXException, IOException, ParserConfigurationException{
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setNamespaceAware(true); // never forget this!
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document doc = builder.parse("CardInfo.xml");
+		this.document = doc;
+
+		XPathFactory xPathFactory = XPathFactory.newInstance();
+		this.xpath = xPathFactory.newXPath();
 	}
 	
 	public MTGCard searchForCardName(String cardName) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
@@ -43,16 +53,9 @@ public class XMLParser {
 	public ArrayList<MTGCard> searchXML(String query) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		
 		
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		factory.setNamespaceAware(true); // never forget this!
-		DocumentBuilder builder = factory.newDocumentBuilder();
-		Document doc = builder.parse("CardInfo.xml");
-		
-		XPathFactory xPathFactory = XPathFactory.newInstance();
-		XPath xpath = xPathFactory.newXPath();
 		XPathExpression expr = xpath.compile(query);
 		
-		Object result = expr.evaluate(doc, XPathConstants.NODESET);
+		Object result = expr.evaluate(this.document, XPathConstants.NODESET);
 		
 		NodeList nodes = (NodeList) result;
 		ArrayList<MTGCard> searchResults = populateListOfCards(nodes);
