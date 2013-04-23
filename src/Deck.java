@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-class Deck {
+public class Deck {
 	private enum Rules{
 		BASIC
 	}
@@ -16,6 +16,10 @@ class Deck {
 		this.rules = determineRules(rule);
 	}
 	
+	public String getprintable(String line){
+		return UserInteraction.messages.getString(line);
+	}
+	
 	private RuleSet determineRules(String rule) {
 		String rules = rule.toUpperCase();
 		RuleSet ruleSet = null;
@@ -24,7 +28,7 @@ class Deck {
 			r = Rules.valueOf(rules);
 		}
 		catch(IllegalArgumentException e){
-			System.out.println("Invalid Rule Default to Basic "+ rules);
+			System.out.println(getprintable("invalidrule")+ rules);
 			r = Rules.BASIC;
 		}
 		
@@ -54,19 +58,20 @@ class Deck {
 		}
 	}
 	
-	@Override
-	public String toString(){
-		if(this.cards.isEmpty()){
-			return "No Cards currently in Deck";
-		}
-		return this.cards.toString();
-		
-	}
+//	@Override
+//	public String toString(){
+//		int i = 1/0;
+//		if(this.cards.isEmpty()){
+//			return "No Cards currently in Deck";
+//		}
+//		return this.cards.toString();
+//		
+//	}
 	
 	public String displayDeck(){
 		String deckString = "";
 		if(this.cards.isEmpty()){
-			return "Deck Empty";
+			return getprintable("nocards");
 		}
 		
 		for(MTGCard card : cards){

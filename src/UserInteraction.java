@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -10,8 +12,15 @@ import org.xml.sax.SAXException;
 
 public class UserInteraction {
 	private ArrayList<MTGCard> searchResults;
+	public static String language;
+	public static String country;
 	private XMLParser parser;
 	private Deck currentDeck;
+	public static Locale currentLocale;
+	public static ResourceBundle messages;
+	public static Locale aLocale = new Locale("en", "US");
+	public static Locale deLocale = new Locale("de", "DE");
+	public static Locale frLocale = new Locale("fr", "FR");
 	
 
 
@@ -39,7 +48,9 @@ public class UserInteraction {
 	
 	public void userInteraction() throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		Scanner input = new Scanner(System.in);
-		System.out.println("Welcome");
+		String lang = getLanguage(input);
+		setLocale(lang);
+		System.out.println(getprintable("welcome"));
 		printUICommands();
 		while(input.hasNext()){
 			
@@ -49,7 +60,7 @@ public class UserInteraction {
 				u = UserCommands.valueOf(command);
 			}
 			catch(IllegalArgumentException e){
-				System.out.println("Unknown command: "+command);
+				System.out.println(getprintable("unknowncerror") + command);
 				printUICommands();
 				continue;
 			}
@@ -75,14 +86,26 @@ public class UserInteraction {
 		}
 			
 	}
+	
+	public String getprintable(String line){
+		return messages.getString(line);
+	}
+
+
+	
 
 
 	private void printUICommands() {
-		System.out.println("Choose Action: ");
-		System.out.println("Search");
-		System.out.println("Display");
-		System.out.println("Deck");
-		System.out.println("Exit");
+		for(int i = 1; i < 6; i++){
+			System.out.println(getprintable("standart" + i));
+		}
+		
+	}
+	
+	private void printDeckCommands() {
+		for(int i = 1; i < 7; i++){
+			System.out.println(getprintable("deckcommands" + i));
+		}
 	}
 	
 	
@@ -97,14 +120,14 @@ public class UserInteraction {
 				c = DeckEnum.valueOf(command);
 			}
 			catch(IllegalArgumentException e){
-				System.out.println("Unknown command: "+ command);
+				System.out.println(getprintable("unknowncerror") + command);
 				printDeckCommands();
 				continue;
 			}
 			
 			switch(c){
 			case DISPLAY:
-				System.out.println(this.currentDeck);
+				System.out.println(this.currentDeck.displayDeck());
 				break;
 			case NEW:
 				result = newDeck(input);
@@ -125,7 +148,7 @@ public class UserInteraction {
 
 private String newDeck(Scanner input){
 	String result = "";
-	System.out.println("Choose RuleSet");
+	System.out.println(getprintable("ruleprompt"));
 	for(Rules value: Rules.values()){
 		System.out.println("    "+value);
 	}
@@ -139,8 +162,8 @@ private String newDeck(Scanner input){
 }
 
 	private void addCard(Scanner input) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
-		System.out.println("Enter number to add and the card's name (Capitalization matters), type 0 to quit");
-		System.out.println("example: 4 Rancor");
+		System.out.println(getprintable("addprompt"));
+		System.out.println(getprintable("example") + " 4 Rancor");
 		int numberToAdd=0;
 		while(input.hasNext()){
 			String numberInput = input.next();
@@ -148,7 +171,7 @@ private String newDeck(Scanner input){
 				numberToAdd = Integer.parseInt(numberInput);
 			}
 			catch(NumberFormatException e){
-				System.out.println("Please enter the number and then the card name");
+				System.out.println(getprintable("addprompterror"));
 				continue;
 			}
 			if(numberToAdd == 0){
@@ -157,9 +180,9 @@ private String newDeck(Scanner input){
 			input.skip(" ");
 			String cardName = input.nextLine();
 			int numberAdded = addCards(numberToAdd, cardName);
-			System.out.println(numberAdded + "Card(s) Added Successfully.");
-			System.out.println("Enter number to add and the card's name (Capitalization matters), type 0 to quit");
-			System.out.println("example: 4 Rancor");
+			System.out.println(getprintable("addcompletion1")+ " " + numberAdded);
+			System.out.println(getprintable("addprompt"));
+			System.out.println(getprintable("example") + " 4 Rancor");
 		}
 	}
 
@@ -181,8 +204,8 @@ private String newDeck(Scanner input){
 
 	private void removeCard(Scanner input) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 
-		System.out.println("Enter number to remove and the card's name (Capitalization matters), type 0 to quit");
-		System.out.println("example: 4 Rancor");
+		System.out.println(getprintable("removeprompt"));
+		System.out.println(getprintable("example") + " 4 Rancor");
 		int numberToRemove=0;
 		while(input.hasNext()){
 			String numberInput = input.next();
@@ -190,7 +213,7 @@ private String newDeck(Scanner input){
 				numberToRemove = Integer.parseInt(numberInput);
 			}
 			catch(NumberFormatException e){
-				System.out.println("Please enter the number and then the card name");
+				System.out.println(getprintable("removeprompterror"));
 				continue;
 			}
 			if(numberToRemove == 0){
@@ -202,35 +225,26 @@ private String newDeck(Scanner input){
 			for(int i=0; i < numberToRemove; i++){
 				this.currentDeck.removeCardFromDeck(card);
 			}
-			System.out.println("Card(s) Removed Successfully.");
-			System.out.println("Enter number to add and the card's name (Capitalization matters), type 0 to quit");
-			System.out.println("example: 4 Rancor");
+			System.out.println(getprintable("removecompletion1"));
+			System.out.println(getprintable("removeprompt"));
+			System.out.println(getprintable("example") + " 4 Rancor");
 		}
 	}
 
 
-
-private void printDeckCommands() {
-	System.out.println("Choose Deck Command");
-	System.out.println("New");
-	System.out.println("Display");
-	System.out.println("Add");
-	System.out.println("Remove");
-	System.out.println("Exit");
+public void printSearchCommands(){
+	for(int i = 1; i < 8 ; i++){
+		System.out.println(getprintable("searchcommand" + i));
+	}
 }
+
 
 
 private void searchCommand(Scanner input) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 		
 		String searchType = "";
 		String searchTerm = "";
-		System.out.println("Choose a search type ");
-		System.out.println("Name <Term>");
-		System.out.println("Type <Term>");
-		System.out.println("Power <Term>");
-		System.out.println("Toughness <Term>");
-		System.out.println("Rules <Term>");
-		System.out.println("Cost <Term>");
+		printSearchCommands();
 		System.out.print("> ");
 		while(input.hasNext()){
 			
@@ -242,14 +256,8 @@ private void searchCommand(Scanner input) throws XPathExpressionException, Parse
 				c = SearchEnumeration.valueOf(command);
 			}
 			catch(IllegalArgumentException e){
-				System.out.println("Unknown command: "+ command);
-				System.out.println("Choose a search type ");
-				System.out.println("Name <Term>");
-				System.out.println("Type <Term>");
-				System.out.println("Power <Term>");
-				System.out.println("Toughness <Term>");
-				System.out.println("Rules <Term>");
-				System.out.println("Cost <Term>");
+				System.out.println(getprintable("unknowncerror") + " ");
+				printSearchCommands();
 				System.out.print("> ");
 				continue;
 			}
@@ -280,19 +288,19 @@ private void searchCommand(Scanner input) throws XPathExpressionException, Parse
 		searchTerm = input.nextLine();
 		
 		this.searchResults = search(this.parser, searchType, searchTerm);
-		System.out.println("Search Concluded with "+ this.searchResults.size() + " results");
+		System.out.println(this.searchResults.size() + " " + getprintable("searchresults"));
 		
 	}
 	public String displayCommand() {
 		StringBuilder sb = new StringBuilder();
 		
 		if(this.searchResults.isEmpty()){
-			sb.append("No current search results");
+			sb.append(getprintable("searchresultsnull"));
 		}
 		else{
 			int searchResultIndex = 1;
 			for(MTGCard card : this.searchResults){
-				sb.append("Result number " + searchResultIndex +"\n");
+				sb.append(getprintable("searchresults") + " " + searchResultIndex +"\n");
 				sb.append(card.toString() + "\n");
 				sb.append("\n");
 				searchResultIndex++;
@@ -314,6 +322,37 @@ private void searchCommand(Scanner input) throws XPathExpressionException, Parse
 		
 		ArrayList<MTGCard> searchResults = parser.searchXML(searchQuery);
 		return searchResults;
+	}
+	
+	public static void setLocale(String locale) {
+		if(locale == "English"){
+			language = "en";
+			country = "US";
+			currentLocale = aLocale;
+			messages = ResourceBundle.getBundle("MessagesBundle", currentLocale);
+		}
+		else{
+			language = "de";
+			country = "DE";
+			currentLocale = deLocale;
+			messages = ResourceBundle.getBundle("MessagesBundle", currentLocale);
+		}
+		
+	}
+
+	private static String getLanguage(Scanner scanInput) {
+		System.out.println("Please select your language");
+		System.out.println("Bitte w\u00E4hlen Sie Ihren Sprache");
+		System.out.println("1. English");
+		System.out.println("2. Deutsch");
+		String num = scanInput.nextLine();
+		if (num.equals("1") || num.equals("English")){
+			return "English";
+		}
+		else if (num.equals("2") || num.equals("Deutsch")){
+			return "German";
+		}
+		return "English";
 	}
 	
 	
