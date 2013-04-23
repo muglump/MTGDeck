@@ -23,18 +23,19 @@ public class UserInteraction {
 	public static Locale frLocale = new Locale("fr", "FR");
 	
 
-
+	private int UserCommandsSize = 6;
 	private enum UserCommands{
 		SEARCH, DISPLAY, DECK, EXIT
 	}
+	private int SearchCommandsSize = 8;
 	private enum SearchEnumeration{
 		NAME, TYPE, POWER, TOUGHNESS, RULES, COST, DISPLAY 
 	}
-	
+	private int DeckCommandsSize = 9;
 	private enum DeckEnum{
-		DISPLAY, NEW, ADD, REMOVE, EXIT
+		DISPLAY, NEW, ADD, REMOVE, EXIT, LOAD, SAVE
 	}
-	
+	private int RuleCommandsSize = 2;
 	private enum Rules{
 		BASIC
 	}
@@ -96,14 +97,14 @@ public class UserInteraction {
 
 
 	private void printUICommands() {
-		for(int i = 1; i < 6; i++){
+		for(int i = 1; i < UserCommandsSize; i++){
 			System.out.println(getprintable("standart" + i));
 		}
 		
 	}
 	
 	private void printDeckCommands() {
-		for(int i = 1; i < 7; i++){
+		for(int i = 1; i < DeckCommandsSize; i++){
 			System.out.println(getprintable("deckcommands" + i));
 		}
 	}
@@ -233,7 +234,7 @@ private String newDeck(Scanner input){
 
 
 public void printSearchCommands(){
-	for(int i = 1; i < 8 ; i++){
+	for(int i = 1; i < SearchCommandsSize ; i++){
 		System.out.println(getprintable("searchcommand" + i));
 	}
 }
