@@ -141,6 +141,11 @@ public class UserInteraction {
 				break;
 			case EXIT:
 				return;
+			case SAVE:
+				System.out.println("Not yet implemented");
+				break;
+			case LOAD:
+				System.out.println("Not yet implemented");
 			}
 			printDeckCommands();
 		}
