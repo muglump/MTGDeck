@@ -1,4 +1,10 @@
+package MTG;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -142,7 +148,20 @@ public class UserInteraction {
 			case EXIT:
 				return;
 			case SAVE:
-				System.out.println("Not yet implemented");
+				String fileName = "";
+				System.out.println("If you have an existing file you would like to save to enter '1', otherwise enter '0'");
+				String fileChooser = input.next();
+				if(fileChooser.equals("1")){
+					System.out.println("What is the exact name of the file:");
+					fileName = input.next();
+					saveDeck(this.currentDeck, fileName);
+				}else if (fileChooser.equals("0")){
+					fileName = createNewFile(input);
+					saveDeck(this.currentDeck, fileName);
+				}else{
+					System.out.println("You input the wrong value");
+				}
+				
 				break;
 			case LOAD:
 				System.out.println("Not yet implemented");
@@ -236,7 +255,40 @@ private String newDeck(Scanner input){
 			System.out.println(getprintable("example") + " 4 Rancor");
 		}
 	}
-
+	public void saveDeck(Deck currentDeck, String fileName){
+		try {
+			FileOutputStream saveFile = new FileOutputStream(fileName);
+			@SuppressWarnings("resource")
+			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			save.writeObject(currentDeck);
+		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String createNewFile(Scanner input){
+		System.out.println("Enter the desired name of the file:");
+		String fileName = input.next();
+		try{
+			File file = new File(fileName);
+			
+			if (file.createNewFile()){
+				System.out.println("You have created a new file");
+			}else{
+				System.out.println("File already exist");
+			}
+		} catch (IOException e){
+			
+			e.printStackTrace();
+		}
+		return fileName;
+		
+		
+	}
 
 public void printSearchCommands(){
 	for(int i = 1; i < SearchCommandsSize ; i++){
