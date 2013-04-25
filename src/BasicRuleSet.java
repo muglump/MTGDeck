@@ -36,5 +36,11 @@ public class BasicRuleSet extends RuleSet {
 		}
 		return true;
 	}
+	
+	@Override
+	public String toString(){
+		return "BASIC";
+		
+	}
 
 }

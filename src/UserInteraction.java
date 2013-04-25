@@ -1,4 +1,3 @@
-package MTG;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -177,14 +176,24 @@ public class UserInteraction {
 		System.out.println(result);
 	}
 
-private void loadDeck(String fileName) {
+private void loadDeck(String fileName) throws XPathExpressionException, ParserConfigurationException, SAXException {
 		try {
 			FileInputStream loadFile = new FileInputStream(fileName);
 			ObjectInputStream load = new ObjectInputStream(loadFile);
-			this.currentDeck = (Deck) load.readObject();
+			Integer numberCardsInFile = (Integer) load.readObject();
+			String rules = (String) load.readObject();
+			this.currentDeck = new Deck(rules);
+			int i = 0;
+			while(i<numberCardsInFile){
+				String cardName = (String) load.readObject();
+				MTGCard card = this.parser.searchForCardName(cardName);
+				this.currentDeck.addCardToDeck(card);
+			}
+		
+			
 		} catch (FileNotFoundException e) {
 			
-			e.printStackTrace();
+			return;
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -285,8 +294,10 @@ private String newDeck(Scanner input){
 			FileOutputStream saveFile = new FileOutputStream(fileName);
 			@SuppressWarnings("resource")
 			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			save.writeObject((Integer) currentDeck.cards.size());
+			save.writeObject((String) currentDeck.rules.toString());
 			for(int i = 0; i < currentDeck.cards.size(); i++){
-			save.writeObject(currentDeck.cards.get(i).name);
+				save.writeObject(currentDeck.cards.get(i).name);
 			}
 			save.close();
 		

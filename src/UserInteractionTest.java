@@ -1,4 +1,3 @@
-package MTG;
 
 
 import static org.junit.Assert.*;
