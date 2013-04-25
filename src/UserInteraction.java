@@ -18,7 +18,7 @@ import org.xml.sax.SAXException;
 
 
 public class UserInteraction {
-	private ArrayList<MTGCard> searchResults;
+	private ArrayList<MTGCard> searchResults = new ArrayList<MTGCard>();
 	public static String language;
 	public static String country;
 	private XMLParser parser;
@@ -40,7 +40,7 @@ public class UserInteraction {
 	}
 	private int DeckCommandsSize = 9;
 	private enum DeckEnum{
-		DISPLAY, NEW, ADD, REMOVE, EXIT, LOAD, SAVE
+		DISPLAY, NEW, ADD, REMOVE, SAVE, LOAD, EXIT
 	}
 	private int RuleCommandsSize = 2;
 	private enum Rules{
@@ -146,8 +146,6 @@ public class UserInteraction {
 			case REMOVE:
 				removeCard(input);
 				break;
-			case EXIT:
-				return;
 			case SAVE:
 				String fileName = "";
 				System.out.println("If you have an existing file you would like to save to enter '1', otherwise enter '0'");
@@ -169,6 +167,10 @@ public class UserInteraction {
 				System.out.println("What file do you want to load?");
 				fileName1 = input.next();
 				loadDeck(fileName1);
+				break;
+			case EXIT:
+				return;
+			
 			}
 			
 			printDeckCommands();

@@ -27,7 +27,9 @@ public class UserInteractionTest {
 		UserInteraction testUI = new UserInteraction();
 		ArrayList<MTGCard> results = testUI.search(testUI.getParser(), "name", "Voidwalk");
 		testUI.setSearchResults(results);
-		assertEquals("Result number 1\nName Voidwalk\nCastingCost 3U\nType Sorcery\nPower n/a\nToughness n/a\nRules Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)\nSets Gatecrash Uncommon\n\n", testUI.displayCommand());
+		testUI.setLocale("English");
+		//System.out.println(results.toString());
+		assertEquals("Results 1\nName Voidwalk\nCastingCost 3U\nType Sorcery\nPower n/a\nToughness n/a\nRules Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)\nSets Gatecrash Uncommon\n\n", testUI.displayCommand());
 	}
 
 	@Test
