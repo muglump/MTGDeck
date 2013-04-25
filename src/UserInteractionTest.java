@@ -1,8 +1,11 @@
+package MTG;
+
 
 import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
@@ -35,6 +38,17 @@ public class UserInteractionTest {
 		ArrayList<MTGCard> results = testUI.search(testUI.getParser(), "name", "Rancor");
 		assertEquals(1, testUI.addCards(1, "Rancor"));
 	}
+	@Test
+	public void testSaveCardCommandandCreateFile() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
+		UserInteraction testUI = new UserInteraction();
+		Deck testDeck = new Deck();
+		Scanner input = new Scanner(System.in);
+		ArrayList<MTGCard> results = testUI.search(testUI.getParser(), "name", "Rancor");
+		testDeck.addCardToDeck(results.get(0));
+		//testUI.createNewFile(input);
+		testUI.saveDeck(testDeck, "FooFile");
+	}
+		
 	
 }
 

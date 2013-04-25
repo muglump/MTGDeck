@@ -1,9 +1,11 @@
 package MTG;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -164,12 +166,35 @@ public class UserInteraction {
 				
 				break;
 			case LOAD:
-				System.out.println("Not yet implemented");
+				String fileName1 = "";
+				System.out.println("What file do you want to load?");
+				fileName1 = input.next();
+				loadDeck(fileName1);
 			}
+			
 			printDeckCommands();
 		}
 		System.out.println(result);
 	}
+
+private void loadDeck(String fileName) {
+		try {
+			FileInputStream loadFile = new FileInputStream(fileName);
+			ObjectInputStream load = new ObjectInputStream(loadFile);
+			this.currentDeck = (Deck) load.readObject();
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
 
 private String newDeck(Scanner input){
 	String result = "";
@@ -260,7 +285,10 @@ private String newDeck(Scanner input){
 			FileOutputStream saveFile = new FileOutputStream(fileName);
 			@SuppressWarnings("resource")
 			ObjectOutputStream save = new ObjectOutputStream(saveFile);
-			save.writeObject(currentDeck);
+			for(int i = 0; i < currentDeck.cards.size(); i++){
+			save.writeObject(currentDeck.cards.get(i).name);
+			}
+			save.close();
 		
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -383,7 +411,7 @@ private void searchCommand(Scanner input) throws XPathExpressionException, Parse
 	}
 	
 	public static void setLocale(String locale) {
-		if(locale == "English"){
+		if(locale == ("English")){
 			language = "en";
 			country = "US";
 			currentLocale = aLocale;
