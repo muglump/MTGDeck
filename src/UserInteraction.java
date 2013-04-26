@@ -1,4 +1,11 @@
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -11,7 +18,7 @@ import org.xml.sax.SAXException;
 
 
 public class UserInteraction {
-	private ArrayList<MTGCard> searchResults;
+	private ArrayList<MTGCard> searchResults = new ArrayList<MTGCard>();
 	public static String language;
 	public static String country;
 	private XMLParser parser;
@@ -33,7 +40,7 @@ public class UserInteraction {
 	}
 	private int DeckCommandsSize = 9;
 	private enum DeckEnum{
-		DISPLAY, NEW, ADD, REMOVE, EXIT, LOAD, SAVE
+		DISPLAY, NEW, ADD, REMOVE, SAVE, LOAD, EXIT
 	}
 	private int RuleCommandsSize = 2;
 	private enum Rules{
@@ -139,18 +146,66 @@ public class UserInteraction {
 			case REMOVE:
 				removeCard(input);
 				break;
-			case EXIT:
-				return;
 			case SAVE:
-				System.out.println("Not yet implemented");
+				String fileName = "";
+				System.out.println("If you have an existing file you would like to save to enter '1', otherwise enter '0'");
+				String fileChooser = input.next();
+				if(fileChooser.equals("1")){
+					System.out.println("What is the exact name of the file:");
+					fileName = input.next();
+					saveDeck(this.currentDeck, fileName);
+				}else if (fileChooser.equals("0")){
+					fileName = createNewFile(input);
+					saveDeck(this.currentDeck, fileName);
+				}else{
+					System.out.println("You input the wrong value");
+				}
+				
 				break;
 			case LOAD:
-				System.out.println("Not yet implemented");
+				String fileName1 = "";
+				System.out.println("What file do you want to load?");
+				fileName1 = input.next();
+				loadDeck(fileName1);
+				break;
+			case EXIT:
+				return;
+			
 			}
+			
 			printDeckCommands();
 		}
 		System.out.println(result);
 	}
+
+private void loadDeck(String fileName) throws XPathExpressionException, ParserConfigurationException, SAXException {
+		try {
+			FileInputStream loadFile = new FileInputStream(fileName);
+			ObjectInputStream load = new ObjectInputStream(loadFile);
+			Integer numberCardsInFile = (Integer) load.readObject();
+			String rules = (String) load.readObject();
+			this.currentDeck = new Deck(rules);
+			int i = 0;
+			while(i<numberCardsInFile){
+				String cardName = (String) load.readObject();
+				MTGCard card = this.parser.searchForCardName(cardName);
+				this.currentDeck.addCardToDeck(card);
+			}
+		
+			
+		} catch (FileNotFoundException e) {
+			
+			return;
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
 
 private String newDeck(Scanner input){
 	String result = "";
@@ -236,7 +291,45 @@ private String newDeck(Scanner input){
 			System.out.println(getprintable("example") + " 4 Rancor");
 		}
 	}
-
+	public void saveDeck(Deck currentDeck, String fileName){
+		try {
+			FileOutputStream saveFile = new FileOutputStream(fileName);
+			@SuppressWarnings("resource")
+			ObjectOutputStream save = new ObjectOutputStream(saveFile);
+			save.writeObject((Integer) currentDeck.cards.size());
+			save.writeObject((String) currentDeck.rules.toString());
+			for(int i = 0; i < currentDeck.cards.size(); i++){
+				save.writeObject(currentDeck.cards.get(i).name);
+			}
+			save.close();
+		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public String createNewFile(Scanner input){
+		System.out.println("Enter the desired name of the file:");
+		String fileName = input.next();
+		try{
+			File file = new File(fileName);
+			
+			if (file.createNewFile()){
+				System.out.println("You have created a new file");
+			}else{
+				System.out.println("File already exist");
+			}
+		} catch (IOException e){
+			
+			e.printStackTrace();
+		}
+		return fileName;
+		
+		
+	}
 
 public void printSearchCommands(){
 	for(int i = 1; i < SearchCommandsSize ; i++){
@@ -331,7 +424,7 @@ private void searchCommand(Scanner input) throws XPathExpressionException, Parse
 	}
 	
 	public static void setLocale(String locale) {
-		if(locale == "English"){
+		if(locale == ("English")){
 			language = "en";
 			country = "US";
 			currentLocale = aLocale;
