@@ -1,3 +1,5 @@
+package MTG;
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -178,7 +180,7 @@ public class UserInteraction {
 		System.out.println(result);
 	}
 
-private void loadDeck(String fileName) throws XPathExpressionException, ParserConfigurationException, SAXException {
+public Deck loadDeck(String fileName) throws XPathExpressionException, ParserConfigurationException, SAXException {
 		try {
 			FileInputStream loadFile = new FileInputStream(fileName);
 			ObjectInputStream load = new ObjectInputStream(loadFile);
@@ -195,7 +197,7 @@ private void loadDeck(String fileName) throws XPathExpressionException, ParserCo
 			
 		} catch (FileNotFoundException e) {
 			
-			return;
+			return null;
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -203,6 +205,7 @@ private void loadDeck(String fileName) throws XPathExpressionException, ParserCo
 			
 			e.printStackTrace();
 		}
+		return this.currentDeck;
 		
 	}
 
