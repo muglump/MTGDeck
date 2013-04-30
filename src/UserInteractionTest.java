@@ -1,4 +1,4 @@
-package MTG;
+
 
 import static org.junit.Assert.*;
 
@@ -48,7 +48,7 @@ public class UserInteractionTest {
 		ArrayList<MTGCard> results = testUI.search(testUI.getParser(), "name", "Rancor");
 		testSaveDeck.addCardToDeck(results.get(0));
 		//String fileName = testUI.createNewFile(input);
-		String fileName = input.nextLine();
+		String fileName = "testfile";
 		File file = new File(fileName);
 		assertTrue(file.createNewFile());
 		testUI.saveDeck(testSaveDeck, fileName);
