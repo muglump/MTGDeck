@@ -85,7 +85,7 @@ public class UserInteraction {
 				this.deckCommands(input);
 				break;
 			case EXIT:
-				return;
+				System.exit(0);
 				
 			}
 			printUICommands();
