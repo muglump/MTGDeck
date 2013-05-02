@@ -1,4 +1,4 @@
-package MTG;
+package deck;
 import java.util.ArrayList;
 
 
@@ -7,5 +7,8 @@ public abstract class RuleSet {
 	public ArrayList<String> sets;
 	public abstract boolean DeckValid(Deck deck);
 	public abstract boolean canBeAdded(MTGCard card, Deck deck);
+	
+	public String toString(){
+		return "Undefined";
+	}
 }
-
