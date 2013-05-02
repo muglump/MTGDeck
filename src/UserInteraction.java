@@ -1,4 +1,5 @@
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -40,7 +41,7 @@ public class UserInteraction {
 	}
 	private int DeckCommandsSize = 9;
 	private enum DeckEnum{
-		DISPLAY, NEW, ADD, REMOVE, SAVE, LOAD, EXIT
+		DISPLAY, NEW, ADD, REMOVE, SAVE, LOAD, EXIT, STATS
 	}
 	private int RuleCommandsSize = 2;
 	private enum Rules{
@@ -119,6 +120,7 @@ public class UserInteraction {
 	
 	private void deckCommands(Scanner input) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 		printDeckCommands();
+		System.out.println("Statistics");
 		String result = "";
 		while(input.hasNext()){
 			String command = input.next();
@@ -145,6 +147,9 @@ public class UserInteraction {
 				break;
 			case REMOVE:
 				removeCard(input);
+				break;
+			case STATS:
+				printStats(this.currentDeck.statistics());
 				break;
 			case SAVE:
 				String fileName = "";
@@ -174,11 +179,37 @@ public class UserInteraction {
 			}
 			
 			printDeckCommands();
+			System.out.println("Statistics");
 		}
 		System.out.println(result);
 	}
 
-private void loadDeck(String fileName) throws XPathExpressionException, ParserConfigurationException, SAXException {
+private void printStats(ArrayList<String> statistics) {
+		System.out.println("The Deck statistics are:");
+		System.out.println("There are " + statistics.get(0) + " cards in the Deck");
+		System.out.println("Of which " + statistics.get(1) + " are lands");
+		System.out.println("# of Swamps " + statistics.get(2));
+		System.out.println("# of Plains " + statistics.get(3));
+		System.out.println("# of Islands " + statistics.get(4));
+		System.out.println("# of Mountains " + statistics.get(5));
+		System.out.println("# of Forests " + statistics.get(6));
+		System.out.println("# Number of Other Lands " + statistics.get(7));
+		System.out.println("There are " + statistics.get(8) + " creatures");
+		System.out.println("There are " + statistics.get(9) + " enchaments");
+		System.out.println("There are " + statistics.get(10) + " sorceries");
+		System.out.println("There are " + statistics.get(11) + " instants");
+		System.out.println("There are " + statistics.get(12) + " artifacts");
+		System.out.println("The average casting cost is " + statistics.get(13));
+		System.out.println("The number of black mana used is " + statistics.get(14));
+		System.out.println("The number of blue mana used is " + statistics.get(15));
+		System.out.println("The number of green mana used is " + statistics.get(16));
+		System.out.println("The number of white mana used is " + statistics.get(17));
+		System.out.println("The number of red mana used is " + statistics.get(18));
+		
+	}
+
+
+public Deck loadDeck(String fileName) throws XPathExpressionException, ParserConfigurationException, SAXException {
 		try {
 			FileInputStream loadFile = new FileInputStream(fileName);
 			ObjectInputStream load = new ObjectInputStream(loadFile);
@@ -195,7 +226,7 @@ private void loadDeck(String fileName) throws XPathExpressionException, ParserCo
 			
 		} catch (FileNotFoundException e) {
 			
-			return;
+			return null;
 		} catch (IOException e) {
 			
 			e.printStackTrace();
@@ -203,6 +234,7 @@ private void loadDeck(String fileName) throws XPathExpressionException, ParserCo
 			
 			e.printStackTrace();
 		}
+		return this.currentDeck;
 		
 	}
 
@@ -252,6 +284,10 @@ private String newDeck(Scanner input){
 			throws XPathExpressionException, ParserConfigurationException,
 			SAXException, IOException {
 		MTGCard card = parser.searchForCardName(cardName);
+		if(card.name.equals("Empty")){
+			return 0;
+		}
+		else{
 		for(int i=0; i < numberToAdd; i++){
 			boolean added = this.currentDeck.addCardToDeck(card);
 			if(added == false){
@@ -259,7 +295,7 @@ private String newDeck(Scanner input){
 			}
 		}
 		return numberToAdd;
-		
+		}
 	}
 	
 

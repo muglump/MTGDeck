@@ -28,6 +28,10 @@ public class XMLParser {
 		String query = buildXPathQuery("name", cardName);
 		ArrayList<MTGCard> listOfCards = searchXML(query);
 		
+		if(listOfCards.isEmpty()){
+			MTGCard card = new MTGCard("Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty");
+			return card;
+		}
 		return listOfCards.get(0);
 		
 	}

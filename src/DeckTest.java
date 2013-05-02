@@ -104,7 +104,6 @@ public class DeckTest {
 		Deck test = new Deck();
 		MTGCard testCard = new MTGCard("test", "test", "test", "3", "3", "test", "test");
 		test.addCardToDeck(testCard);
-		System.out.println(test.cards.toString());
 		String result = testCard.toString();
 		Assert.assertEquals(result, test.displayDeck());
 	}
@@ -126,6 +125,42 @@ public class DeckTest {
 		test.addCardToDeck(testCard);
 		test.removeCardFromDeck(testCard);
 		Assert.assertFalse(test.cards.isEmpty());
+	}
+	
+	@Test
+	public void DeckgetColorCost(){
+		Deck test = new Deck();
+		MTGCard testCard = new MTGCard("Test", "4B", "Creature", "4", "4", "None", "None");
+		test.addCardToDeck(testCard);
+		int BlackUsed = test.getColorCost('B');
+		Assert.assertEquals(BlackUsed, 1);
+	}
+	
+	@Test
+	public void DeckgetCardCostNoColor(){
+		Deck test = new Deck();
+		MTGCard testCard = new MTGCard("Test", "4B", "Creature", "4", "4", "None", "None");
+		test.addCardToDeck(testCard);
+		int cost = test.getCardCostNoColor();
+		Assert.assertEquals(5, cost);
+	}
+	
+	@Test
+	public void DeckgetLandCount(){
+		Deck test = new Deck();
+		MTGCard testCard = new MTGCard("Test", "", "Land", "", "", "None", "None");
+		test.addCardToDeck(testCard);
+		int landCount = test.getLCount("Test");
+		Assert.assertEquals(1, landCount);
+	}
+	
+	@Test
+	public void DeckgetTypeCount(){
+		Deck test = new Deck();
+		MTGCard testCard = new MTGCard("Test", "4B", "Creature", "4", "4", "None", "None");
+		test.addCardToDeck(testCard);
+		int cards = test.getTypeCount("Creature");
+		Assert.assertEquals(1, cards);
 	}
 	
 	
