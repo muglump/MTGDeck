@@ -73,14 +73,19 @@ public class Deck {
 		String plainCount = (String) String.valueOf(getLCount("Plains"));
 		String islandCount = (String) String.valueOf(getLCount("Island"));
 		String mountainCount = (String) String.valueOf(getLCount("Mountain"));
-		String temp = (String) String.valueOf(getTypeCount("Land") - getLCount("Forest") - getLCount("Swamp") - getLCount("Plain") - getLCount("Island") - getLCount("Mountain"));
+		String temp = (String) String.valueOf(getTypeCount("Land") + (getLCount("Forest") + getLCount("Swamp") + getLCount("Plain") + getLCount("Island") + getLCount("Mountain")));
 		String otherCount = "";
 		if((Integer) Integer.valueOf(temp) > 0){
 			otherCount = temp;
 		}else{
 			otherCount = "0";
 		}
-		String averageCost = (String) String.valueOf(getCardCostNoColor() / this.cards.size());
+		String averageCost = "0";
+		if(this.cards.size() == 0){
+			averageCost = "0";
+		}else{
+			averageCost = (String) String.valueOf(getCardCostNoColor() / this.cards.size());
+		}
 		String blackManaUsed = (String) String.valueOf(getColorCost('B'));
 		String blueManaUsed = (String) String.valueOf(getColorCost('U'));
 		String greenManaUsed = (String) String.valueOf(getColorCost('G'));

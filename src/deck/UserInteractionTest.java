@@ -51,7 +51,7 @@ public class UserInteractionTest {
 		//String fileName = testUI.createNewFile(input);
 		String fileName = "testfile";
 		File file = new File(fileName);
-		assertTrue(file.createNewFile());
+		//assertTrue(file.createNewFile());
 		testUI.saveDeck(testSaveDeck, fileName);
 		assertTrue(file.exists());
 		Deck testLoadDeck = testUI.loadDeck(fileName);

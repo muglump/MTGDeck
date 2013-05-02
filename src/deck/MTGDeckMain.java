@@ -13,8 +13,8 @@ public class MTGDeckMain {
 
 	
 	public static void main(String[] args) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
-		//UserInteraction user = new UserInteraction();
-		//user.userInteraction();
+		UserInteraction user = new UserInteraction();
+		user.userInteraction();
 		MagicDeckFrame frame = new MagicDeckFrame();
 		frame.setVisible(true);
 		

@@ -40,7 +40,7 @@ public class UserInteraction {
 	private enum SearchEnumeration{
 		NAME, TYPE, POWER, TOUGHNESS, RULES, COST, DISPLAY 
 	}
-	private int DeckCommandsSize = 9;
+	private int DeckCommandsSize = 10;
 	private enum DeckEnum{
 		DISPLAY, NEW, ADD, REMOVE, SAVE, LOAD, EXIT, STATS
 	}
@@ -121,7 +121,6 @@ public class UserInteraction {
 	
 	private void deckCommands(Scanner input) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 		printDeckCommands();
-		System.out.println("Statistics");
 		String result = "";
 		while(input.hasNext()){
 			String command = input.next();
@@ -154,23 +153,23 @@ public class UserInteraction {
 				break;
 			case SAVE:
 				String fileName = "";
-				System.out.println("If you have an existing file you would like to save to enter '1', otherwise enter '0'");
+				System.out.println(getprintable("saveprompt1"));
 				String fileChooser = input.next();
 				if(fileChooser.equals("1")){
-					System.out.println("What is the exact name of the file:");
+					System.out.println(getprintable("saveprompt2"));
 					fileName = input.next();
 					saveDeck(this.currentDeck, fileName);
 				}else if (fileChooser.equals("0")){
 					fileName = createNewFile(input);
 					saveDeck(this.currentDeck, fileName);
 				}else{
-					System.out.println("You input the wrong value");
+					System.out.println(getprintable("saveerror"));
 				}
 				
 				break;
 			case LOAD:
 				String fileName1 = "";
-				System.out.println("What file do you want to load?");
+				System.out.println(getprintable("loadprompt"));
 				fileName1 = input.next();
 				loadDeck(fileName1);
 				break;
@@ -180,32 +179,15 @@ public class UserInteraction {
 			}
 			
 			printDeckCommands();
-			System.out.println("Statistics");
 		}
 		System.out.println(result);
 	}
 
 private void printStats(ArrayList<String> statistics) {
-		System.out.println("The Deck statistics are:");
-		System.out.println("There are " + statistics.get(0) + " cards in the Deck");
-		System.out.println("Of which " + statistics.get(1) + " are lands");
-		System.out.println("# of Swamps " + statistics.get(2));
-		System.out.println("# of Plains " + statistics.get(3));
-		System.out.println("# of Islands " + statistics.get(4));
-		System.out.println("# of Mountains " + statistics.get(5));
-		System.out.println("# of Forests " + statistics.get(6));
-		System.out.println("# Number of Other Lands " + statistics.get(7));
-		System.out.println("There are " + statistics.get(8) + " creatures");
-		System.out.println("There are " + statistics.get(9) + " enchaments");
-		System.out.println("There are " + statistics.get(10) + " sorceries");
-		System.out.println("There are " + statistics.get(11) + " instants");
-		System.out.println("There are " + statistics.get(12) + " artifacts");
-		System.out.println("The average casting cost is " + statistics.get(13));
-		System.out.println("The number of black mana used is " + statistics.get(14));
-		System.out.println("The number of blue mana used is " + statistics.get(15));
-		System.out.println("The number of green mana used is " + statistics.get(16));
-		System.out.println("The number of white mana used is " + statistics.get(17));
-		System.out.println("The number of red mana used is " + statistics.get(18));
+		System.out.println(getprintable("stats0"));
+		for(int i = 0; i < statistics.size(); i++){
+			System.out.println(getprintable("stats" + i) + " " + statistics.get(i));
+		}
 		
 	}
 
@@ -349,15 +331,15 @@ private String newDeck(Scanner input){
 	}
 	
 	public String createNewFile(Scanner input){
-		System.out.println("Enter the desired name of the file:");
+		System.out.println(getprintable("newfile1"));
 		String fileName = input.next();
 		try{
 			File file = new File(fileName);
 			
 			if (file.createNewFile()){
-				System.out.println("You have created a new file");
+				System.out.println(getprintable("newfile2"));
 			}else{
-				System.out.println("File already exist");
+				System.out.println(getprintable("newfile3"));
 			}
 		} catch (IOException e){
 			
