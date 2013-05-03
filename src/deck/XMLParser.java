@@ -30,7 +30,7 @@ public class XMLParser {
 		
 	}
 	
-	public MTGCard searchForCardName(String cardName) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
+	public MTGCard searchForCardName(String cardName) {
 		String query = buildXPathQuery("name", cardName);
 		ArrayList<MTGCard> listOfCards = searchXML(query);
 		

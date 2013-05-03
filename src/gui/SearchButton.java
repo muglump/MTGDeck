@@ -20,9 +20,9 @@ public class SearchButton extends JButton implements ActionListener {
 	private ArrayList<MTGCard> results;
 	private CardDisplayPanel cardDisplay;
 
-	public SearchButton(String name, CardDisplayPanel cardDisplay) throws ParserConfigurationException, SAXException, IOException{
+	public SearchButton(String name, CardDisplayPanel cardDisplay, XMLParser parser) throws ParserConfigurationException, SAXException, IOException{
 		super(name);
-		this.parser = new XMLParser();
+		this.parser = parser;
 		this.addActionListener(this);
 		this.cardDisplay = cardDisplay;
 		
@@ -35,7 +35,7 @@ public class SearchButton extends JButton implements ActionListener {
 			String term = JOptionPane.showInputDialog("Enter a Search Term");
 			String query = this.parser.buildXPathQuery(type.toLowerCase(), term);
 			this.results = this.parser.searchXML(query);
-			this.cardDisplay.setResults(this.results);
+			this.cardDisplay.setListOfCards(this.results);
 			this.cardDisplay.repaint();
 	}
 	

@@ -10,20 +10,19 @@ import deck.MTGCard;
 
 public class CardDisplayPanel extends JPanel {
 	
-	private ArrayList<MTGCard> results;
+	private ArrayList<MTGCard> listOfCards;
 	private int currentCardIndex;
 
 	public CardDisplayPanel(){
 		super();
 		this.currentCardIndex = 0;
-		this.results = new ArrayList<MTGCard>();
+		this.listOfCards = new ArrayList<MTGCard>();
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		this.drawSkeleton(g);
-		this.drawResults(g);
-		System.out.println("hi");
+		this.drawlistOfCards(g);
 	}
 	
 	private void drawSkeleton(Graphics g) {
@@ -38,14 +37,14 @@ public class CardDisplayPanel extends JPanel {
 		g.drawString("P/T:", 400, 600);
 	}
 	
-	private void drawResults(Graphics g) {
-		if(!this.results.isEmpty()){
-			String name = this.results.get(this.currentCardIndex).name;
-			String type = this.results.get(this.currentCardIndex).type;
-			String rules = this.results.get(this.currentCardIndex).rules;
-			String sets = this.results.get(this.currentCardIndex).sets;
-			String cost = this.results.get(this.currentCardIndex).castingCost;
-			String pt = this.results.get(this.currentCardIndex).power + "/" + this.results.get(this.currentCardIndex).toughness;
+	private void drawlistOfCards(Graphics g) {
+		if(!this.listOfCards.isEmpty()){
+			String name = this.listOfCards.get(this.currentCardIndex).name;
+			String type = this.listOfCards.get(this.currentCardIndex).type;
+			String rules = this.listOfCards.get(this.currentCardIndex).rules;
+			String sets = this.listOfCards.get(this.currentCardIndex).sets;
+			String cost = this.listOfCards.get(this.currentCardIndex).castingCost;
+			String pt = this.listOfCards.get(this.currentCardIndex).power + "/" + this.listOfCards.get(this.currentCardIndex).toughness;
 			g.drawString(name, 100, 70);
 			g.drawString(type, 90, 90);
 			drawRules(g, rules, 150, 370);
@@ -70,12 +69,12 @@ public class CardDisplayPanel extends JPanel {
 		}
 	}
 
-	public void setResults(ArrayList<MTGCard> results){
-		this.results=  results;
+	public void setListOfCards(ArrayList<MTGCard> listOfCards){
+		this.listOfCards=  listOfCards;
 	}
 	
 	public void shiftCardIndex(int i){
-		if((this.currentCardIndex == 0 && i <0) || (this.currentCardIndex == this.results.size()-1 && i>0)){
+		if((this.currentCardIndex == 0 && i <0) || (this.currentCardIndex == this.listOfCards.size()-1 && i>0)){
 			return;
 		}
 		else{

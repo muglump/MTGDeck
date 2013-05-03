@@ -21,8 +21,9 @@ public class MTGDeckMain {
 	//	UserInteraction user = new UserInteraction();
 		//user.userInteraction();
 		MagicDeckFrame frame = new MagicDeckFrame();
-		SearchPanel searchPane = new SearchPanel();
-		DeckPanel deckPane = new DeckPanel();
+		XMLParser parser = new XMLParser();
+		SearchPanel searchPane = new SearchPanel(parser);
+		DeckPanel deckPane = new DeckPanel(parser);
 		JTabbedPane cardPanel = new JTabbedPane();
 		cardPanel.addTab("Deck", deckPane);
 		cardPanel.addTab("Search", searchPane);

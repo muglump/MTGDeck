@@ -12,6 +12,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import deck.MTGCard;
+import deck.XMLParser;
 
 
 import java.awt.BorderLayout;
@@ -27,13 +28,16 @@ import java.util.ArrayList;
 public class SearchPanel extends JPanel{
 	
 	
-	public SearchPanel() throws ParserConfigurationException, SAXException, IOException{
+	private XMLParser parser;
+
+	public SearchPanel(XMLParser parser) throws ParserConfigurationException, SAXException, IOException{
 		super(new BorderLayout());
+		this.parser = parser;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		CardDisplayPanel cardDisplay = new CardDisplayPanel();
 		NextButton nextButton = new NextButton("Next", cardDisplay);
 		PreviousButton previousButton = new PreviousButton("Previous", cardDisplay);
-		SearchButton searchButton = new SearchButton("Search", cardDisplay);
+		SearchButton searchButton = new SearchButton("Search", cardDisplay, this.parser);
 		this.add(cardDisplay, BorderLayout.CENTER);
 		this.add(nextButton, BorderLayout.LINE_END);
 		this.add(previousButton, BorderLayout.LINE_START);

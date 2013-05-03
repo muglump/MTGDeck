@@ -21,6 +21,10 @@ public class Deck {
 		return UserInteraction.messages.getString(line);
 	}
 	
+	public void setRules(String rule){
+		this.rules = determineRules(rule);
+	}
+	
 	private RuleSet determineRules(String rule) {
 		String rules = rule.toUpperCase();
 		RuleSet ruleSet = null;
