@@ -38,12 +38,7 @@ public class DeckPanel extends JPanel{
 	private void drawArtifacts(Graphics g) {
 		/** TODO This method should draw the artifacts of the UI
 		*		This includes the:
-		*			Card List Navigation buttons,
-		*			Card UI layout,
-		*			Deck Type Area
 		*			
-		*		
-		*
 		*/       
 	}
 

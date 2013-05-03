@@ -18,11 +18,16 @@ import org.xml.sax.SAXException;
 
 
 public class XMLParser {
+	Document doc;
+	
+	
+	public XMLParser() throws ParserConfigurationException, SAXException, IOException{
 
-	
-	
-	public XMLParser(){
-	
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setNamespaceAware(true); // never forget this!
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		this.doc = builder.parse("CardInfo.xml");
+		
 	}
 	
 	public MTGCard searchForCardName(String cardName) throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
@@ -45,20 +50,25 @@ public class XMLParser {
 		
 	}
 	
-	public ArrayList<MTGCard> searchXML(String query) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
-		
-		
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		factory.setNamespaceAware(true); // never forget this!
-		DocumentBuilder builder = factory.newDocumentBuilder();
-		Document doc = builder.parse("CardInfo.xml");
+	public ArrayList<MTGCard> searchXML(String query) {
 		
 		XPathFactory xPathFactory = XPathFactory.newInstance();
 		XPath xpath = xPathFactory.newXPath();
-		XPathExpression expr = xpath.compile(query);
+		XPathExpression expr = null;
+		try {
+			expr = xpath.compile(query);
+		} catch (XPathExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		Object result = expr.evaluate(doc, XPathConstants.NODESET);
-		
+		Object result = null;
+		try {
+			result = expr.evaluate(this.doc, XPathConstants.NODESET);
+		} catch (XPathExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		NodeList nodes = (NodeList) result;
 		ArrayList<MTGCard> searchResults = populateListOfCards(nodes);
 		
