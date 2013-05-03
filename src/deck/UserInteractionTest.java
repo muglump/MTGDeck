@@ -1,5 +1,4 @@
-package deck;
-
+package MTG;
 
 import static org.junit.Assert.*;
 
@@ -42,22 +41,29 @@ public class UserInteractionTest {
 		assertEquals(1, testUI.addCards(1, "Rancor"));
 	}
 	@Test
-	public void testSaveAndLoadCardCommandandCreateFile() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
+	public void testSaveCardCommandandCreateFile() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
 		UserInteraction testUI = new UserInteraction();
 		Deck testSaveDeck = new Deck();
 		Scanner input = new Scanner(System.in);
 		ArrayList<MTGCard> results = testUI.search(testUI.getParser(), "name", "Rancor");
 		testSaveDeck.addCardToDeck(results.get(0));
-		//String fileName = testUI.createNewFile(input);
-		String fileName = "testfile";
+		String fileName = input.nextLine();
 		File file = new File(fileName);
-		//assertTrue(file.createNewFile());
+		assertTrue(file.createNewFile());
 		testUI.saveDeck(testSaveDeck, fileName);
 		assertTrue(file.exists());
-		Deck testLoadDeck = testUI.loadDeck(fileName);
-		assertEquals(testLoadDeck.cards.get(0).name, results.get(0).name);
-		assertEquals(testLoadDeck.cards.size(), testSaveDeck.cards.size());
+
 		
+	}
+	@Test
+	public void testLoadCardCommand() throws XPathExpressionException, ParserConfigurationException, SAXException, IOException{
+		Scanner input = new Scanner(System.in);
+		String fileName = input.nextLine();
+		UserInteraction testUI = new UserInteraction();
+		Deck testLoadDeck = testUI.loadDeck(fileName);
+		ArrayList<MTGCard> results = testUI.search(testUI.getParser(), "name", "Rancor");
+		assertEquals(testLoadDeck.cards.get(0).name, results.get(0).name);
+		assertEquals(testLoadDeck.cards.size(), results.size());
 	}
 		
 	

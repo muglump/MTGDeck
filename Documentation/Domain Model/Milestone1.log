@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.3.15)  18 APR 2013 10:47
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.3.15)  2 MAY 2013 21:28
 entering extended mode
 **C:/Users/savrdada/Documents/GitHub/MTGDeck/Documentation/Domain*Model/Milesto
 ne1.tex
@@ -398,36 +398,80 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 34.
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.50 			\item \textbf
+                     {Usability Testing}- Usability testing is also extremel...
+[1] [2]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 48.
+(Font)              <7> on input line 89.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 48.
+(Font)              <5> on input line 89.
 
-Overfull \hbox (13.2204pt too wide) in paragraph at lines 49--50
+Overfull \hbox (65.71994pt too wide) in paragraph at lines 89--90
+[][]$\OT1/cmtt/m/n/10 http : / / www . google . com / url ? sa = t&rct = j&q = 
+&esrc = s&source = web&cd = 3&ved = 0CEkQFjAC&url = http % 3A % 2F % 2Fwww . re
+searchgate .$
+ []
+
+
+Overfull \hbox (76.21985pt too wide) in paragraph at lines 89--90
+$\OT1/cmtt/m/n/10 net % 2Fpublication % 2F2886929 _ Quality _ Attributes _ in _
+ Mobile _ Web _ Application _ Development % 2Ffile % 2F32bfe50f19680bd614 .$
+ []
+
+
+Overfull \hbox (2.72049pt too wide) in paragraph at lines 90--91
+[][]$\OT1/cmtt/m/n/10 http : / / www . computerworld . com / s / article / 9235
+570 / Scot _ Finnie _ 5 _ tips _ for _ developing _ successful _ mobile _$
+ []
+
+
+Overfull \hbox (7.72049pt too wide) in paragraph at lines 91--92
+[][]$\OT1/cmtt/m/n/10 http : / / www . allvoices . com / contributed-[]news / 1
+4127039-[]reasons-[]for-[]failure-[]of-[]apps-[]in-[]the-[]mobile-[]market$[] 
+ []
+
+
+Overfull \hbox (50.22012pt too wide) in paragraph at lines 93--94
+[][]$\OT1/cmtt/m/n/10 http : / / www . on3solutions . com / blog / 4-[]essentia
+l-[]tips-[]and-[]the-[]secret-[]to-[]success-[]in-[]mobile-[]software-[]develop
+ment/$[] 
+ []
+
+
+Overfull \hbox (18.47035pt too wide) in paragraph at lines 97--98
+[][]$\OT1/cmtt/m/n/10 http : / / mobilegovwiki . howto . gov / Mobile + Analyti
+cs + Usage + %26 + Other + Metrics # Mobile % 20Performance % 20Metrics$[] 
+ []
+
+
+Overfull \hbox (65.71994pt too wide) in paragraph at lines 98--99
+[][]$\OT1/cmtt/m/n/10 https : / / developer . apple . com / library / ios / #do
+cumentation / iPhone / Conceptual / iPhoneOSProgrammingGuide / Indroduction /$
+ []
+
+
+Overfull \hbox (13.2204pt too wide) in paragraph at lines 101--102
 [][]$\OT1/cmtt/m/n/10 https : / / www . google . com / url ? sa = t&rct = j&q =
  &esrc = s&source = web&cd = 5&cad = rja&ved = 0CGoQFjAE&url = http % 3A % 2F %
 $
  []
 
 
-Overfull \hbox (28.97026pt too wide) in paragraph at lines 49--50
+Overfull \hbox (28.97026pt too wide) in paragraph at lines 101--102
 $\OT1/cmtt/m/n/10 2Fwww . researchgate . net % 2Fpublication % 2F2886929 _ Qual
 ity _ Attributes _ in _ Mobile _ Web _ Application _ Development %$
  []
 
 
-Overfull \hbox (18.47035pt too wide) in paragraph at lines 49--50
+Overfull \hbox (18.47035pt too wide) in paragraph at lines 101--102
 $\OT1/cmtt/m/n/10 2Ffile % 2F32bfe50f19680bd614 . pdf&ei = vf5vUcjILuPX2QWmtYDY
 Bw&usg = AFQjCNEccYgcpdvJVFOBPKXZ5hnjxMCNYA&sig2 =$
  []
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.52 			\item \url
-                  {http://www.indianic.com/quality-assurance-process-mobile....
-[1]
 
 Package glossaries Warning: \makeglossaries hasn't been used,
 the glossaries will not be updated.
@@ -436,33 +480,34 @@ the glossaries will not be updated.
 Package glossaries Warning: No \printglossary or \printglossaries found.
 This document will not have a glossary.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 55.
-[2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 55.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 107.
+[3]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 107.
 
 ("C:\Users\savrdada\Documents\GitHub\MTGDeck\Documentation\Domain Model\Milesto
 ne1.aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 55.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 55.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 107.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 107.
 Package rerunfilecheck Info: File `Milestone1.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 55.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 107.
  ) 
 Here is how much of TeX's memory you used:
- 7490 strings out of 494049
- 109753 string characters out of 3148474
- 221867 words of memory out of 3000000
- 10702 multiletter control sequences out of 15000+200000
- 5018 words of font info for 19 fonts, out of 3000000 for 9000
+ 7501 strings out of 494049
+ 109866 string characters out of 3148474
+ 225867 words of memory out of 3000000
+ 10703 multiletter control sequences out of 15000+200000
+ 5326 words of font info for 20 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 31i,10n,43p,1397b,387s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on Milestone1.pdf (3 pages, 73121 bytes).
+ 31i,10n,43p,1397b,393s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on Milestone1.pdf (4 pages, 100443 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 10 named destinations out of 1000 (max. 500000)
+ 84 PDF objects out of 1000 (max. 8388607)
+ 19 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
