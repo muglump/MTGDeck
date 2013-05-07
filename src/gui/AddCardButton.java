@@ -30,9 +30,9 @@ public class AddCardButton extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		String name= JOptionPane.showInputDialog("Enter a Card's Name, Capitalization Matters");
-		String number= JOptionPane.showInputDialog("How many?");
-		String ruleset = JOptionPane.showInputDialog("What Ruleset?");
+		String name = MagicDeckFrame.messages.getString("GUISearch1");
+		String number = MagicDeckFrame.messages.getString("GUISearch2");
+		String ruleset = MagicDeckFrame.messages.getString("GUISearch 3");
 		this.deck.setRules(ruleset);
 		MTGCard card = this.parser.searchForCardName(name);
 		Integer num = Integer.parseInt(number);

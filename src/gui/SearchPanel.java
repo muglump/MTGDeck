@@ -35,9 +35,9 @@ public class SearchPanel extends JPanel{
 		this.parser = parser;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		CardDisplayPanel cardDisplay = new CardDisplayPanel();
-		NextButton nextButton = new NextButton("Next", cardDisplay);
-		PreviousButton previousButton = new PreviousButton("Previous", cardDisplay);
-		SearchButton searchButton = new SearchButton("Search", cardDisplay, this.parser);
+		NextButton nextButton = new NextButton(MagicDeckFrame.messages.getString("Next"), cardDisplay);
+		PreviousButton previousButton = new PreviousButton(MagicDeckFrame.messages.getString("Previous"), cardDisplay);
+		SearchButton searchButton = new SearchButton(MagicDeckFrame.messages.getString("Search"), cardDisplay, this.parser);
 		this.add(cardDisplay, BorderLayout.CENTER);
 		this.add(nextButton, BorderLayout.LINE_END);
 		this.add(previousButton, BorderLayout.LINE_START);

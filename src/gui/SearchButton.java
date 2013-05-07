@@ -31,8 +31,8 @@ public class SearchButton extends JButton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			String type = JOptionPane.showInputDialog("Enter a Search Type (Name, Power, etc...)");
-			String term = JOptionPane.showInputDialog("Enter a Search Term");
+			String type = JOptionPane.showInputDialog(MagicDeckFrame.messages.getString("SearchButton2"));
+			String term = JOptionPane.showInputDialog(MagicDeckFrame.messages.getString("SearchButton3"));
 			String query = this.parser.buildXPathQuery(type.toLowerCase(), term);
 			this.results = this.parser.searchXML(query);
 			this.cardDisplay.setListOfCards(this.results);

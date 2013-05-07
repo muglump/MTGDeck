@@ -1,4 +1,4 @@
-package MTG;
+package deck;
 
 import static org.junit.Assert.*;
 
