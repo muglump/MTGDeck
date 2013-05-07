@@ -12,6 +12,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import deck.MTGCard;
+import deck.MTGDeckMain;
 import deck.XMLParser;
 
 
@@ -35,9 +36,9 @@ public class SearchPanel extends JPanel{
 		this.parser = parser;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		CardDisplayPanel cardDisplay = new CardDisplayPanel();
-		NextButton nextButton = new NextButton(MagicDeckFrame.messages.getString("Next"), cardDisplay);
-		PreviousButton previousButton = new PreviousButton(MagicDeckFrame.messages.getString("Previous"), cardDisplay);
-		SearchButton searchButton = new SearchButton(MagicDeckFrame.messages.getString("Search"), cardDisplay, this.parser);
+		NextButton nextButton = new NextButton(MTGDeckMain.messages.getString("Next"), cardDisplay);
+		PreviousButton previousButton = new PreviousButton(MTGDeckMain.messages.getString("Previous"), cardDisplay);
+		SearchButton searchButton = new SearchButton(MTGDeckMain.messages.getString("SearchButton1"), cardDisplay, this.parser);
 		this.add(cardDisplay, BorderLayout.CENTER);
 		this.add(nextButton, BorderLayout.LINE_END);
 		this.add(previousButton, BorderLayout.LINE_START);

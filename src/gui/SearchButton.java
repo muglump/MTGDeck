@@ -12,6 +12,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import deck.MTGCard;
+import deck.MTGDeckMain;
 import deck.XMLParser;
 
 public class SearchButton extends JButton implements ActionListener {
@@ -31,8 +32,8 @@ public class SearchButton extends JButton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			String type = JOptionPane.showInputDialog(MagicDeckFrame.messages.getString("SearchButton2"));
-			String term = JOptionPane.showInputDialog(MagicDeckFrame.messages.getString("SearchButton3"));
+			String type = JOptionPane.showInputDialog(MTGDeckMain.messages.getString("SearchButton2"));
+			String term = JOptionPane.showInputDialog(MTGDeckMain.messages.getString("SearchButton3"));
 			String query = this.parser.buildXPathQuery(type.toLowerCase(), term);
 			this.results = this.parser.searchXML(query);
 			this.cardDisplay.setListOfCards(this.results);

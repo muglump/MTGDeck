@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 
 import deck.Deck;
 import deck.MTGCard;
+import deck.MTGDeckMain;
 import deck.XMLParser;
 
 public class AddCardButton extends JButton implements ActionListener{
@@ -30,9 +31,9 @@ public class AddCardButton extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		String name = MagicDeckFrame.messages.getString("GUISearch1");
-		String number = MagicDeckFrame.messages.getString("GUISearch2");
-		String ruleset = MagicDeckFrame.messages.getString("GUISearch 3");
+		String name = MTGDeckMain.messages.getString("GUISearch1");
+		String number = MTGDeckMain.messages.getString("GUISearch2");
+		String ruleset = MTGDeckMain.messages.getString("GUISearch 3");
 		this.deck.setRules(ruleset);
 		MTGCard card = this.parser.searchForCardName(name);
 		Integer num = Integer.parseInt(number);
