@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\usepackage[margin = 0.5in]{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{glossaries}
+\usepackage{graphicx}
+\pagenumbering{arabic}
+\onehalfspacing
+\pagestyle{fancy}
+\fancyhead[L]{MTG Deck Builder}
+\fancyhead[C]{Intermediate Status Report}
+\fancyhead[R]{5-10-2013}
+
+\begin{document}
+	\begin{titlepage}
+		\vspace*{\fill}
+		\hrulefill
+		\begin{center}
+			\section*{Intermediate Status Report}
+			\subsection*{CSSE 376}
+			\subsection*{Thomas Morris, David Savrda, Alexander White}
+			5-10-2013
+		\end{center}
+		\hrulefill
+		\vspace*{\fill}
+	\end{titlepage}
+	\newpage
+	\section*{Next weeks development}
+		Not sure what we will develop. will discuss with Sriram 
+	\section*{Next weeks test cases}
+	\section*{Code coverage}
+		Code coverage at approximately 80 percent .
+	\section*{Metrics}
+		\subsection*{Reliability}
+			\begin{itemize}
+				\item Gets the correct data that corresponds with the given card name consistently
+				\item Save consistently saves cards to the file
+				\item Load consistently gets the cards from the file
+			\end{itemize}
+		\subsection*{Validity}
+			\begin{itemize}
+				\item Requested card data is correct
+				\item When a card name is loaded from a file, the correct and precise card is returned from the XML
+				\item Deck's have the correct number of cards, and all cards are in the right sets
+			\end{itemize}
+		\subsection*{Product}
+			\begin{itemize}
+				\item Performance - When the parser is called it should take a maximum of 5 seconds to return a result.
+				\item Size - The UserInteraction class should be approximately 500 to 600 lines of code.
+			\end{itemize}
+		\subsection*{Additional Metrics}
+			\begin{itemize}
+				\item Average Methods Size: Less then 15 LOC in Classes. Less then 5 LOC in Test Classes.
+				\item Average number of methods per class: System Classes 8 methods, Test Classes 5 methods.
+				\item Average number of Instance Variable per Class - Less the 7 instance variables per class.
+				\item Number of Classes: 25
+				\item Number of Message Bundles: 2
+				\item Number of Test Classes: 4
+			\end{itemize}
+	
+	
+\end{document}
