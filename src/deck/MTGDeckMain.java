@@ -34,9 +34,11 @@ public class MTGDeckMain {
 		XMLParser parser = new XMLParser();
 		SearchPanel searchPane = new SearchPanel(parser);
 		DeckPanel deckPane = new DeckPanel(parser);
+		SaveLoadPanel saveLoadPane = new SaveLoadPanel(parser);
 		JTabbedPane cardPanel = new JTabbedPane();
 		cardPanel.addTab("Deck", deckPane);
 		cardPanel.addTab("Search", searchPane);
+		cardPanel.addTab("Save/Load", saveLoadPane);
 		frame.add(cardPanel);
 		frame.setVisible(true);
 		
