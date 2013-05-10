@@ -1,10 +1,12 @@
 package deck;
+import gui.CardNotInRulesetException;
+
 import java.util.ArrayList;
 
 
 public class Deck {
 	private enum Rules{
-		BASIC
+		BASIC, STANDARD, DRAFT
 	}
 	public ArrayList<MTGCard> cards;
 	public RuleSet rules;
@@ -33,7 +35,7 @@ public class Deck {
 			r = Rules.valueOf(rules);
 		}
 		catch(IllegalArgumentException e){
-			System.out.println(getprintable("invalidrule")+ rules);
+			//System.out.println(getprintable("invalidrule")+ rules);
 			r = Rules.BASIC;
 		}
 		
@@ -41,17 +43,22 @@ public class Deck {
 		case BASIC:
 			ruleSet = new BasicRuleSet();
 			break;
+		case STANDARD:
+			ruleSet = new StandardRuleSet();
+		case DRAFT:
+			ruleSet = new DraftRuleSet();
 		}
 		return ruleSet;
 	}
 	
-	public boolean addCardToDeck(MTGCard card){
+	public boolean addCardToDeck(MTGCard card) throws CardNotInRulesetException{
 		boolean valid = rules.canBeAdded(card, this);
 		if(valid){
 			cards.add(card);
 			return true;
+		}else{
+			throw new CardNotInRulesetException();
 		}
-		return false;
 	}
 	
 	public void removeCardFromDeck(MTGCard cardToRemove){

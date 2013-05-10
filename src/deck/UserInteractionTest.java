@@ -49,8 +49,8 @@ public class UserInteractionTest {
 		testSaveDeck.addCardToDeck(results.get(0));
 		String fileName = input.nextLine();
 		File file = new File(fileName);
-		assertTrue(file.createNewFile());
-		testUI.saveDeck(testSaveDeck, fileName);
+	//	assertTrue(file.createNewFile());
+		testUI.saveDeck(testSaveDeck, file);
 		assertTrue(file.exists());
 
 		

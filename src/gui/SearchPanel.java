@@ -11,6 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import deck.Deck;
 import deck.MTGCard;
 import deck.MTGDeckMain;
 import deck.XMLParser;
@@ -30,19 +31,25 @@ public class SearchPanel extends JPanel{
 	
 	
 	private XMLParser parser;
-
-	public SearchPanel(XMLParser parser) throws ParserConfigurationException, SAXException, IOException{
+	private DeckPanel deck;
+	
+	public SearchPanel(XMLParser parser, DeckPanel deck) throws ParserConfigurationException, SAXException, IOException{
 		super(new BorderLayout());
+		this.deck = deck;
 		this.parser = parser;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		CardDisplayPanel cardDisplay = new CardDisplayPanel();
+		JPanel menuButtonPanel = new JPanel();
 		NextButton nextButton = new NextButton(MTGDeckMain.messages.getString("Next"), cardDisplay);
 		PreviousButton previousButton = new PreviousButton(MTGDeckMain.messages.getString("Previous"), cardDisplay);
 		SearchButton searchButton = new SearchButton(MTGDeckMain.messages.getString("SearchButton1"), cardDisplay, this.parser);
+		AddResultButton addResultButton = new AddResultButton("Add This Card", cardDisplay, deck);
 		this.add(cardDisplay, BorderLayout.CENTER);
 		this.add(nextButton, BorderLayout.LINE_END);
 		this.add(previousButton, BorderLayout.LINE_START);
-		this.add(searchButton, BorderLayout.PAGE_START);
+		menuButtonPanel.add(searchButton);
+		menuButtonPanel.add(addResultButton);
+		this.add(menuButtonPanel, BorderLayout.PAGE_START);
 	}
 	
 	public Dimension getPrefferedSize() {

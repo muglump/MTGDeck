@@ -19,28 +19,33 @@ public class AddCardButton extends JButton implements ActionListener{
 
 	private CardDisplayPanel cardDisplay;
 	private XMLParser parser;
-	private Deck deck;
+	private DeckPanel deckPane;
 
-	public AddCardButton(String string, CardDisplayPanel cardDisplay, XMLParser parser) throws ParserConfigurationException, SAXException, IOException {
+	public AddCardButton(String string, CardDisplayPanel cardDisplay, XMLParser parser, DeckPanel deckPanel) throws ParserConfigurationException, SAXException, IOException {
 		super(string);
 		this.cardDisplay = cardDisplay;
 		this.addActionListener(this);
 		this.parser = parser;
-		this.deck = new Deck();
+		this.deckPane = deckPanel;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		String name = MTGDeckMain.messages.getString("GUISearch1");
-		String number = MTGDeckMain.messages.getString("GUISearch2");
-		String ruleset = MTGDeckMain.messages.getString("GUISearch 3");
-		this.deck.setRules(ruleset);
+		
+		String name = JOptionPane.showInputDialog(MTGDeckMain.messages.getString("GUISearch1"));
+		String number = JOptionPane.showInputDialog(MTGDeckMain.messages.getString("GUISearch2"));
+		String ruleset = JOptionPane.showInputDialog(MTGDeckMain.messages.getString("GUISearch3"));
+		this.deckPane.getDeck().setRules(ruleset);
 		MTGCard card = this.parser.searchForCardName(name);
 		Integer num = Integer.parseInt(number);
 		for(int i = 0; i < num.intValue(); i++){
-			this.deck.addCardToDeck(card);
+			try{
+				this.deckPane.getDeck().addCardToDeck(card);
+			}catch(CardNotInRulesetException e){
+				JOptionPane.showMessageDialog(this, "This card is not allowed in selected ruleset");
+			}
 		}
-		this.cardDisplay.setListOfCards(this.deck.cards);
+		this.cardDisplay.setListOfCards(this.deckPane.getDeck().cards);
 		this.cardDisplay.repaint();
 	}
 

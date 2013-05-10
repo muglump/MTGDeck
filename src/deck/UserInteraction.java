@@ -1,6 +1,9 @@
 package deck;
 
 
+import gui.CardNotInRulesetException;
+
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -152,15 +155,13 @@ public class UserInteraction {
 				printStats(this.currentDeck.statistics());
 				break;
 			case SAVE:
-				String fileName = "";
+				File fileName = new File("");
 				System.out.println(getprintable("saveprompt1"));
 				String fileChooser = input.next();
 				if(fileChooser.equals("1")){
 					System.out.println(getprintable("saveprompt2"));
-					fileName = input.next();
 					saveDeck(this.currentDeck, fileName);
 				}else if (fileChooser.equals("0")){
-					fileName = createNewFile(input);
 					saveDeck(this.currentDeck, fileName);
 				}else{
 					System.out.println(getprintable("saveerror"));
@@ -171,7 +172,8 @@ public class UserInteraction {
 				String fileName1 = "";
 				System.out.println(getprintable("loadprompt"));
 				fileName1 = input.next();
-				loadDeck(fileName1);
+				File fi = new File(fileName1);
+				loadDeck(fi, this.parser);
 				break;
 			case EXIT:
 				return;
@@ -192,18 +194,23 @@ private void printStats(ArrayList<String> statistics) {
 	}
 
 
-public Deck loadDeck(String fileName) throws XPathExpressionException, ParserConfigurationException, SAXException {
+public static Deck loadDeck(File fileName, XMLParser parser)  {
+		Deck deck = new Deck();
 		try {
 			FileInputStream loadFile = new FileInputStream(fileName);
 			ObjectInputStream load = new ObjectInputStream(loadFile);
 			Integer numberCardsInFile = (Integer) load.readObject();
 			String rules = (String) load.readObject();
-			this.currentDeck = new Deck(rules);
+			deck = new Deck(rules);
 			int i = 0;
 			while(i<numberCardsInFile){
 				String cardName = (String) load.readObject();
-				MTGCard card = this.parser.searchForCardName(cardName);
-				this.currentDeck.addCardToDeck(card);
+				MTGCard card = parser.searchForCardName(cardName);
+				try {
+					deck.addCardToDeck(card);
+				} catch (CardNotInRulesetException e) {
+					//Shouldn't reach this exception unless binary was modified.
+				}
 			}
 		
 			
@@ -211,13 +218,14 @@ public Deck loadDeck(String fileName) throws XPathExpressionException, ParserCon
 			
 			return null;
 		} catch (IOException e) {
-			
-			e.printStackTrace();
+			System.out.println("eof");
+			return deck;
+			//e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			
 			e.printStackTrace();
-		}
-		return this.currentDeck;
+		} 
+		return deck;
 		
 	}
 
@@ -272,7 +280,12 @@ private String newDeck(Scanner input){
 		}
 		else{
 		for(int i=0; i < numberToAdd; i++){
-			boolean added = this.currentDeck.addCardToDeck(card);
+			boolean added = false;
+			try {
+				added = this.currentDeck.addCardToDeck(card);
+			} catch (CardNotInRulesetException e) {
+				//shouldnt reach
+			}
 			if(added == false){
 				return i;
 			}
@@ -310,7 +323,7 @@ private String newDeck(Scanner input){
 			System.out.println(getprintable("example") + " 4 Rancor");
 		}
 	}
-	public void saveDeck(Deck currentDeck, String fileName){
+	public static void saveDeck(Deck currentDeck, File fileName){
 		try {
 			FileOutputStream saveFile = new FileOutputStream(fileName);
 			@SuppressWarnings("resource")

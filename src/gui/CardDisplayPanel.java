@@ -82,5 +82,13 @@ public class CardDisplayPanel extends JPanel {
 		}
 	}
 	
+	public MTGCard getCurrentCard(){
+		return this.listOfCards.get(this.currentCardIndex);
+		
+	}
+	
+	public boolean cardsEmpty(){
+		return this.listOfCards.isEmpty();
+	}
 	
 }
