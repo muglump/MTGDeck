@@ -34,7 +34,7 @@ public class LoadDeckButton extends JButton implements ActionListener{
 			File loadFile = fc.getSelectedFile();
 			this.deck.setDeck(UserInteraction.loadDeck(loadFile,  this.parser));
 			this.cardDisplayPanel.setListOfCards(this.deck.getDeck().cards);
-			this.cardDisplayPanel.repaint();
+			this.getParent().getParent().repaint();
 		}
 	}
 

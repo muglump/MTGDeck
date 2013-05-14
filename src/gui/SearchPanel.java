@@ -32,19 +32,22 @@ public class SearchPanel extends JPanel{
 	
 	private XMLParser parser;
 	private DeckPanel deck;
+	private NextButton nextButton;
+	private PreviousButton previousButton;
+	private CardDisplayPanel cardDisplayPanel;
 	
 	public SearchPanel(XMLParser parser, DeckPanel deck) throws ParserConfigurationException, SAXException, IOException{
 		super(new BorderLayout());
 		this.deck = deck;
 		this.parser = parser;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
-		CardDisplayPanel cardDisplay = new CardDisplayPanel();
+		this.cardDisplayPanel = new CardDisplayPanel();
 		JPanel menuButtonPanel = new JPanel();
-		NextButton nextButton = new NextButton(MTGDeckMain.messages.getString("Next"), cardDisplay);
-		PreviousButton previousButton = new PreviousButton(MTGDeckMain.messages.getString("Previous"), cardDisplay);
-		SearchButton searchButton = new SearchButton(MTGDeckMain.messages.getString("SearchButton1"), cardDisplay, this.parser);
-		AddResultButton addResultButton = new AddResultButton("Add This Card", cardDisplay, deck);
-		this.add(cardDisplay, BorderLayout.CENTER);
+		this.nextButton = new NextButton(MTGDeckMain.messages.getString("Next"), cardDisplayPanel);
+		this.previousButton = new PreviousButton(MTGDeckMain.messages.getString("Previous"), cardDisplayPanel);
+		SearchButton searchButton = new SearchButton(MTGDeckMain.messages.getString("SearchButton1"), cardDisplayPanel, this.parser);
+		AddResultButton addResultButton = new AddResultButton("Add This Card", cardDisplayPanel, deck);
+		this.add(cardDisplayPanel, BorderLayout.CENTER);
 		this.add(nextButton, BorderLayout.LINE_END);
 		this.add(previousButton, BorderLayout.LINE_START);
 		menuButtonPanel.add(searchButton);
@@ -58,7 +61,23 @@ public class SearchPanel extends JPanel{
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-	}
+		setNavButtons();
+		}
+
+		private void setNavButtons() {
+			if(this.cardDisplayPanel.noMoreToTheRight()){
+				this.nextButton.setEnabled(false);
+			}
+			else{
+				this.nextButton.setEnabled(true);
+			}
+			if(this.cardDisplayPanel.noMoreToTheLeft()){
+				this.previousButton.setEnabled(false);
+			}
+			else{
+				this.previousButton.setEnabled(true);
+			}
+		}
 
 		
 	

@@ -41,6 +41,6 @@ public class AddResultButton extends JButton implements ActionListener{
 			JOptionPane.showMessageDialog(this, "No Results");
 		}
 		this.deckPanel.getCardDisplay().setListOfCards(this.deckPanel.getDeck().cards);
-		this.deckPanel.getCardDisplay().repaint();
+		this.deckPanel.repaint();
 	}
 }
