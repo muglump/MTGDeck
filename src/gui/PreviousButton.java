@@ -18,7 +18,7 @@ public class PreviousButton extends JButton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.cardDisplay.shiftCardIndex(-1);
-		this.cardDisplay.repaint();
+		this.getParent().repaint();
 	}
 	
 }

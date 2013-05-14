@@ -46,7 +46,8 @@ public class AddCardButton extends JButton implements ActionListener{
 			}
 		}
 		this.cardDisplay.setListOfCards(this.deckPane.getDeck().cards);
-		this.cardDisplay.repaint();
+		//Gets menu button panel's parent, which is deck panel which we want to repaint
+		this.getParent().getParent().repaint();
 	}
 
 }

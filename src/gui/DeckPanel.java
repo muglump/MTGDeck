@@ -21,6 +21,8 @@ public class DeckPanel extends JPanel{
 	private XMLParser parser;
 	private Deck deck;
 	private CardDisplayPanel cardDisplayPanel;
+	private NextButton nextButton;
+	private PreviousButton previousButton;
 	
 	public DeckPanel(XMLParser parser, Deck deck) throws ParserConfigurationException, SAXException, IOException{
 		super(new BorderLayout());
@@ -29,16 +31,16 @@ public class DeckPanel extends JPanel{
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		CardDisplayPanel cardDisplay = new CardDisplayPanel();
 		this.cardDisplayPanel = cardDisplay;
-		NextButton nextButton = new NextButton(MTGDeckMain.messages.getString("Next"), cardDisplay);
-		PreviousButton previousButton = new PreviousButton(MTGDeckMain.messages.getString("Previous"), cardDisplay);
+		this.nextButton = new NextButton(MTGDeckMain.messages.getString("Next"), cardDisplay);
+		this.previousButton = new PreviousButton(MTGDeckMain.messages.getString("Previous"), cardDisplay);
 		JPanel menuButtonPanel = new JPanel();
 		AddCardButton addButton = new AddCardButton(MTGDeckMain.messages.getString("Add"), cardDisplay, this.parser, this);
 		SaveDeckButton saveButton = new SaveDeckButton("Save", this.deck);
 		LoadDeckButton loadButton = new LoadDeckButton("Load", this, this.parser, cardDisplay);
 		RemoveCardButton removeButton = new RemoveCardButton("Remove", this, cardDisplay);
 		this.add(cardDisplay, BorderLayout.CENTER);
-		this.add(nextButton, BorderLayout.LINE_END);
-		this.add(previousButton, BorderLayout.LINE_START);
+		this.add(this.nextButton, BorderLayout.LINE_END);
+		this.add(this.previousButton, BorderLayout.LINE_START);
 		menuButtonPanel.add(addButton);
 		menuButtonPanel.add(removeButton);
 		menuButtonPanel.add(saveButton);
@@ -53,6 +55,22 @@ public class DeckPanel extends JPanel{
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		setNavButtons();
+	}
+
+	private void setNavButtons() {
+		if(this.cardDisplayPanel.noMoreToTheRight()){
+			this.nextButton.setEnabled(false);
+		}
+		else{
+			this.nextButton.setEnabled(true);
+		}
+		if(this.cardDisplayPanel.noMoreToTheLeft()){
+			this.previousButton.setEnabled(false);
+		}
+		else{
+			this.previousButton.setEnabled(true);
+		}
 	}
 
 	public Deck getDeck(){
@@ -72,5 +90,8 @@ public class DeckPanel extends JPanel{
 		// TODO Auto-generated method stub
 		return this.cardDisplayPanel;
 	}
+
+	
+
 	
 }

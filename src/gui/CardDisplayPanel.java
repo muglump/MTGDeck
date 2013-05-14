@@ -91,4 +91,14 @@ public class CardDisplayPanel extends JPanel {
 		return this.listOfCards.isEmpty();
 	}
 	
+	public boolean noMoreToTheRight(){
+		return this.currentCardIndex>=this.listOfCards.size()-1;
+		
+	}
+	
+	public boolean noMoreToTheLeft(){
+		return this.currentCardIndex==0;
+		
+	}
+	
 }
