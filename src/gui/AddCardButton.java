@@ -34,8 +34,6 @@ public class AddCardButton extends JButton implements ActionListener{
 		
 		String name = JOptionPane.showInputDialog(MTGDeckMain.messages.getString("GUISearch1"));
 		String number = JOptionPane.showInputDialog(MTGDeckMain.messages.getString("GUISearch2"));
-		String ruleset = JOptionPane.showInputDialog(MTGDeckMain.messages.getString("GUISearch3"));
-		this.deckPane.getDeck().setRules(ruleset);
 		MTGCard card = this.parser.searchForCardName(name);
 		Integer num = Integer.parseInt(number);
 		for(int i = 0; i < num.intValue(); i++){

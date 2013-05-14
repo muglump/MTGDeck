@@ -4,9 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -17,12 +21,13 @@ import deck.MTGCard;
 import deck.MTGDeckMain;
 import deck.XMLParser;
 
-public class DeckPanel extends JPanel{
+public class DeckPanel extends JPanel implements ActionListener{
 	private XMLParser parser;
 	private Deck deck;
 	private CardDisplayPanel cardDisplayPanel;
 	private NextButton nextButton;
 	private PreviousButton previousButton;
+	private String[] rulesetStrings = { "BASIC", "STANDARD", "DRAFT" };
 	
 	public DeckPanel(XMLParser parser, Deck deck) throws ParserConfigurationException, SAXException, IOException{
 		super(new BorderLayout());
@@ -38,6 +43,8 @@ public class DeckPanel extends JPanel{
 		SaveDeckButton saveButton = new SaveDeckButton("Save", this.deck);
 		LoadDeckButton loadButton = new LoadDeckButton("Load", this, this.parser, cardDisplay);
 		RemoveCardButton removeButton = new RemoveCardButton("Remove", this, cardDisplay);
+		JComboBox deckRulesetBox = new JComboBox(this.rulesetStrings);
+		deckRulesetBox.addActionListener(this);
 		this.add(cardDisplay, BorderLayout.CENTER);
 		this.add(this.nextButton, BorderLayout.LINE_END);
 		this.add(this.previousButton, BorderLayout.LINE_START);
@@ -45,6 +52,7 @@ public class DeckPanel extends JPanel{
 		menuButtonPanel.add(removeButton);
 		menuButtonPanel.add(saveButton);
 		menuButtonPanel.add(loadButton);
+		menuButtonPanel.add(deckRulesetBox);
 		this.add(menuButtonPanel, BorderLayout.PAGE_START);
 		
 	}
@@ -89,6 +97,18 @@ public class DeckPanel extends JPanel{
 	public CardDisplayPanel getCardDisplay() {
 		// TODO Auto-generated method stub
 		return this.cardDisplayPanel;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		JComboBox rulesetBox = (JComboBox) arg0.getSource();
+		try {
+			this.deck.setRules((String) rulesetBox.getSelectedItem());
+		} catch (CardNotInRulesetException e) {
+			JOptionPane.showMessageDialog(this, "The current deck is incompatable with this ruleset. \n Please remove the invalid card(s).");
+		}
+		this.repaint();
+		
 	}
 
 	

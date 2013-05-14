@@ -23,10 +23,24 @@ public class Deck {
 		return UserInteraction.messages.getString(line);
 	}
 	
-	public void setRules(String rule){
-		this.rules = determineRules(rule);
+	public void setRules(String rule) throws CardNotInRulesetException{
+		RuleSet newSet = determineRules(rule);
+		if(!(this.isValidRules(newSet))){
+			throw new CardNotInRulesetException();
+		}
+		else{
+			this.rules = newSet;
+		}
 	}
 	
+	private boolean isValidRules(RuleSet newSet) {
+		for(MTGCard card : this.cards){
+			if(!(newSet.canBeAdded(card, this))){
+				return false;
+			}
+		}
+		return true;
+	}
 	private RuleSet determineRules(String rule) {
 		String rules = rule.toUpperCase();
 		RuleSet ruleSet = null;

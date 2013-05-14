@@ -20,8 +20,16 @@ public class RemoveCardButton extends JButton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		this.deckPanel.getDeck().removeCardFromDeck(this.cardDisplay.getCurrentCard());
-		this.cardDisplay.setListOfCards(this.deckPanel.getDeck().cards);
-		this.cardDisplay.repaint();
+		if(this.deckPanel.getDeck().cards.size()==0){
+			return;
+		}
+		else{
+			this.deckPanel.getDeck().removeCardFromDeck(this.cardDisplay.getCurrentCard());
+			if (this.cardDisplay.noMoreToTheRight()){
+				this.cardDisplay.shiftCardIndex(-1);
+			}
+			this.cardDisplay.setListOfCards(this.deckPanel.getDeck().cards);
+			this.getParent().getParent().repaint();
+		}
 	}
 }
