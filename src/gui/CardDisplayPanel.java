@@ -15,11 +15,20 @@ public class CardDisplayPanel extends JPanel {
 	
 	private ArrayList<MTGCard> listOfCards;
 	private int currentCardIndex;
+	private JTextArea rulesArea;
 
 	public CardDisplayPanel(){
 		super();
+		this.setLayout(null);
 		this.currentCardIndex = 0;
 		this.listOfCards = new ArrayList<MTGCard>();
+		this.rulesArea = new JTextArea();
+		this.rulesArea.setEditable(false);
+		this.rulesArea.setLineWrap(true);
+		this.rulesArea.setWrapStyleWord(true);
+		this.rulesArea.setBounds(110, 380, 370, 150);
+		this.add(rulesArea);
+		
 	}
 
 	public void paintComponent(Graphics g) {
@@ -48,15 +57,10 @@ public class CardDisplayPanel extends JPanel {
 			String sets = this.listOfCards.get(this.currentCardIndex).sets;
 			String cost = this.listOfCards.get(this.currentCardIndex).castingCost;
 			String pt = this.listOfCards.get(this.currentCardIndex).power + "/" + this.listOfCards.get(this.currentCardIndex).toughness;
-			//JTextArea rulesArea = new JTextArea();
-			//rulesArea.insert(rules, 0);
-			//rulesArea.setEditable(false);
-			//rulesArea.setLineWrap(true);
-			//rulesArea.setWrapStyleWord(true);
-			//rulesArea.setBounds(110, 370, 370, 150);
+			this.rulesArea.setText(rules);
 			g.drawString(name, 100, 70);
 			g.drawString(type, 90, 90);
-			drawRules(g, rules, 150, 370);
+			//drawRules(g, rules, 150, 370);
 			drawSets(g, sets, 90, 120);
 			g.drawString(cost, 440, 70);
 			g.drawString(pt, 440, 600);
