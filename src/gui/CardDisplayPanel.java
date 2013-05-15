@@ -1,10 +1,13 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import deck.MTGCard;
 
@@ -45,6 +48,12 @@ public class CardDisplayPanel extends JPanel {
 			String sets = this.listOfCards.get(this.currentCardIndex).sets;
 			String cost = this.listOfCards.get(this.currentCardIndex).castingCost;
 			String pt = this.listOfCards.get(this.currentCardIndex).power + "/" + this.listOfCards.get(this.currentCardIndex).toughness;
+			//JTextArea rulesArea = new JTextArea();
+			//rulesArea.insert(rules, 0);
+			//rulesArea.setEditable(false);
+			//rulesArea.setLineWrap(true);
+			//rulesArea.setWrapStyleWord(true);
+			//rulesArea.setBounds(110, 370, 370, 150);
 			g.drawString(name, 100, 70);
 			g.drawString(type, 90, 90);
 			drawRules(g, rules, 150, 370);

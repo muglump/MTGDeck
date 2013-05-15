@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import deck.MTGDeckMain;
+
 public class AddResultButton extends JButton implements ActionListener{
 
 	private DeckPanel deckPanel;
@@ -28,12 +30,12 @@ public class AddResultButton extends JButton implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		if(!this.cardDisplay.cardsEmpty()){
-			int number = Integer.parseInt(JOptionPane.showInputDialog("How many do you want to add?"));
+			int number = Integer.parseInt(JOptionPane.showInputDialog(MTGDeckMain.messages.getString("NumToAdd")));
 			for(int i=0; i<number; i++){
 				try{
 					this.deckPanel.addCardToDeck(this.cardDisplay.getCurrentCard());
 				}catch(CardNotInRulesetException e){
-					JOptionPane.showMessageDialog(this, "This card is not allowed in current ruleset");
+					JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("RuleVio"));
 				}
 			}
 		}

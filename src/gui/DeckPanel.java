@@ -28,6 +28,7 @@ public class DeckPanel extends JPanel implements ActionListener{
 	private NextButton nextButton;
 	private PreviousButton previousButton;
 	private String[] rulesetStrings = { "BASIC", "STANDARD", "DRAFT" };
+	private JPanel menu;
 	
 	public DeckPanel(XMLParser parser, Deck deck) throws ParserConfigurationException, SAXException, IOException{
 		super(new BorderLayout());
@@ -38,24 +39,48 @@ public class DeckPanel extends JPanel implements ActionListener{
 		this.cardDisplayPanel = cardDisplay;
 		this.nextButton = new NextButton(MTGDeckMain.messages.getString("Next"), cardDisplay);
 		this.previousButton = new PreviousButton(MTGDeckMain.messages.getString("Previous"), cardDisplay);
-		JPanel menuButtonPanel = new JPanel();
+		this.menu = new JPanel();
 		AddCardButton addButton = new AddCardButton(MTGDeckMain.messages.getString("Add"), cardDisplay, this.parser, this);
-		SaveDeckButton saveButton = new SaveDeckButton("Save", this.deck);
-		LoadDeckButton loadButton = new LoadDeckButton("Load", this, this.parser, cardDisplay);
-		RemoveCardButton removeButton = new RemoveCardButton("Remove", this, cardDisplay);
+		SaveDeckButton saveButton = new SaveDeckButton(MTGDeckMain.messages.getString("deckcommands6"), this.deck);
+		LoadDeckButton loadButton = new LoadDeckButton(MTGDeckMain.messages.getString("deckcommands7"), this, this.parser, cardDisplay);
+		RemoveCardButton removeButton = new RemoveCardButton(MTGDeckMain.messages.getString("deckcommands5"), this, cardDisplay);
 		JComboBox deckRulesetBox = new JComboBox(this.rulesetStrings);
 		deckRulesetBox.addActionListener(this);
 		this.add(cardDisplay, BorderLayout.CENTER);
 		this.add(this.nextButton, BorderLayout.LINE_END);
 		this.add(this.previousButton, BorderLayout.LINE_START);
-		menuButtonPanel.add(addButton);
-		menuButtonPanel.add(removeButton);
-		menuButtonPanel.add(saveButton);
-		menuButtonPanel.add(loadButton);
-		menuButtonPanel.add(deckRulesetBox);
-		this.add(menuButtonPanel, BorderLayout.PAGE_START);
+		this.menu.add(addButton);
+		this.menu.add(removeButton);
+		this.menu.add(saveButton);
+		this.menu.add(loadButton);
+		this.menu.add(deckRulesetBox);
+		this.add(this.menu, BorderLayout.PAGE_START);
 		
 	}
+	
+	public void reSet() throws ParserConfigurationException, SAXException, IOException{
+		this.menu.removeAll();
+		this.removeAll();
+		this.nextButton = new NextButton(MTGDeckMain.messages.getString("Next"), this.cardDisplayPanel);
+		this.previousButton = new PreviousButton(MTGDeckMain.messages.getString("Previous"), this.cardDisplayPanel);
+		AddCardButton addButton = new AddCardButton(MTGDeckMain.messages.getString("Add"), this.cardDisplayPanel, this.parser, this);
+		SaveDeckButton saveButton = new SaveDeckButton(MTGDeckMain.messages.getString("deckcommands6"), this.deck);
+		LoadDeckButton loadButton = new LoadDeckButton(MTGDeckMain.messages.getString("deckcommands7"), this, this.parser, this.cardDisplayPanel);
+		RemoveCardButton removeButton = new RemoveCardButton(MTGDeckMain.messages.getString("deckcommands5"), this, this.cardDisplayPanel);
+		JComboBox deckRulesetBox = new JComboBox(this.rulesetStrings);
+		deckRulesetBox.addActionListener(this);
+		this.add(this.cardDisplayPanel, BorderLayout.CENTER);
+		this.add(this.nextButton, BorderLayout.LINE_END);
+		this.add(this.previousButton, BorderLayout.LINE_START);
+		this.menu.add(addButton);
+		this.menu.add(removeButton);
+		this.menu.add(saveButton);
+		this.menu.add(loadButton);
+		this.menu.add(deckRulesetBox);
+		this.add(this.menu, BorderLayout.PAGE_START);
+		this.repaint();
+	}
+	
 	
 	public Dimension getPrefferedSize() {
 		return new Dimension(800,600);
@@ -105,7 +130,7 @@ public class DeckPanel extends JPanel implements ActionListener{
 		try {
 			this.deck.setRules((String) rulesetBox.getSelectedItem());
 		} catch (CardNotInRulesetException e) {
-			JOptionPane.showMessageDialog(this, "The current deck is incompatable with this ruleset. \n Please remove the invalid card(s).");
+			JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("InvDeck"));
 		}
 		this.repaint();
 		

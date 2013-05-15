@@ -40,7 +40,7 @@ public class AddCardButton extends JButton implements ActionListener{
 			try{
 				this.deckPane.getDeck().addCardToDeck(card);
 			}catch(CardNotInRulesetException e){
-				JOptionPane.showMessageDialog(this, "This card is not allowed in selected ruleset");
+				JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("This card is not allowed in selected ruleset"));
 			}
 		}
 		this.cardDisplay.setListOfCards(this.deckPane.getDeck().cards);

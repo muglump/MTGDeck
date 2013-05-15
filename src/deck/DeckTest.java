@@ -1,5 +1,6 @@
 package deck;
 import static org.junit.Assert.*;
+import gui.CardNotInRulesetException;
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class DeckTest {
 	}
 	
 	@Test
-	public void testDeckCanAddCard(){
+	public void testDeckCanAddCard() throws CardNotInRulesetException{
 		Deck test = new Deck();
 		MTGCard testCard = new MTGCard("test", "4", "4", "4", "4", "Testing", "4");
 		Assert.assertTrue(test.cards.isEmpty());
@@ -37,7 +38,7 @@ public class DeckTest {
 	}
 	
 	@Test
-	public void testDeckCannotAddCardsOver60(){
+	public void testDeckCannotAddCardsOver60() throws CardNotInRulesetException{
 		Deck test = new Deck();
 		MTGCard testCard = new MTGCard("test", "4", "4", "4", "4", "Testing", "4");
 		MTGCard testCard1 = new MTGCard("test1", "4", "4", "4", "4", "Testing", "4");
@@ -79,7 +80,7 @@ public class DeckTest {
 	}
 	
 	@Test
-	public void DeckCannotHaveMoreThen4OfTheSameNonLandCards(){
+	public void DeckCannotHaveMoreThen4OfTheSameNonLandCards() throws CardNotInRulesetException{
 		Deck test = new Deck();
 		MTGCard testCard14 = new MTGCard("test14", "4", "4", "4", "4", "Testing", "4");
 		for(int i = 0; i < 4; i++){
@@ -91,7 +92,7 @@ public class DeckTest {
 	}
 	
 	@Test 
-	public void DeckCanHaveMoreThen4NonLandCards(){
+	public void DeckCanHaveMoreThen4NonLandCards() throws CardNotInRulesetException{
 		Deck test = new Deck();
 		MTGCard testCard14 = new MTGCard("test14", "4", "Basic Land", "4", "4", "Land", "4");
 		for(int i = 0; i < 5; i++){
@@ -101,7 +102,7 @@ public class DeckTest {
 	}
 	
 	@Test
-	public void DeckDisplay(){
+	public void DeckDisplay() throws CardNotInRulesetException{
 		Deck test = new Deck();
 		MTGCard testCard = new MTGCard("test", "test", "test", "3", "3", "test", "test");
 		test.addCardToDeck(testCard);
@@ -110,7 +111,7 @@ public class DeckTest {
 	}
 	
 	@Test
-	public void DeckRemove(){
+	public void DeckRemove() throws CardNotInRulesetException{
 		Deck test = new Deck();
 		MTGCard testCard = new MTGCard("test", "test", "test", "3", "3", "test", "test");
 		test.addCardToDeck(testCard);
@@ -119,7 +120,7 @@ public class DeckTest {
 	}
 	
 	@Test
-	public void DeckRemoveOnlyRemoves1(){
+	public void DeckRemoveOnlyRemoves1() throws CardNotInRulesetException{
 		Deck test = new Deck();
 		MTGCard testCard = new MTGCard("test", "test", "test", "3", "3", "test", "test");
 		test.addCardToDeck(testCard);
@@ -129,7 +130,7 @@ public class DeckTest {
 	}
 	
 	@Test
-	public void DeckgetColorCost(){
+	public void DeckgetColorCost() throws CardNotInRulesetException{
 		Deck test = new Deck();
 		MTGCard testCard = new MTGCard("Test", "4B", "Creature", "4", "4", "None", "None");
 		test.addCardToDeck(testCard);
@@ -138,7 +139,7 @@ public class DeckTest {
 	}
 	
 	@Test
-	public void DeckgetCardCostNoColor(){
+	public void DeckgetCardCostNoColor() throws CardNotInRulesetException{
 		Deck test = new Deck();
 		MTGCard testCard = new MTGCard("Test", "4B", "Creature", "4", "4", "None", "None");
 		test.addCardToDeck(testCard);
@@ -147,7 +148,7 @@ public class DeckTest {
 	}
 	
 	@Test
-	public void DeckgetLandCount(){
+	public void DeckgetLandCount() throws CardNotInRulesetException{
 		Deck test = new Deck();
 		MTGCard testCard = new MTGCard("Test", "", "Land", "", "", "None", "None");
 		test.addCardToDeck(testCard);
@@ -156,7 +157,7 @@ public class DeckTest {
 	}
 	
 	@Test
-	public void DeckgetTypeCount(){
+	public void DeckgetTypeCount() throws CardNotInRulesetException{
 		Deck test = new Deck();
 		MTGCard testCard = new MTGCard("Test", "4B", "Creature", "4", "4", "None", "None");
 		test.addCardToDeck(testCard);

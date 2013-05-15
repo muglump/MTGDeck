@@ -35,9 +35,13 @@ public class MTGDeckMain {
 		XMLParser parser = new XMLParser();
 		DeckPanel deckPane = new DeckPanel(parser, theDeck);
 		SearchPanel searchPane = new SearchPanel(parser, deckPane);
+		LanugaugePanel langPane = new LanugaugePanel(deckPane, searchPane, theDeck);
+		StatsPanel statsPane = new StatsPanel(theDeck);
 		JTabbedPane cardPanel = new JTabbedPane();
+		cardPanel.addTab("Language", langPane);
 		cardPanel.addTab("Deck", deckPane);
 		cardPanel.addTab("Search", searchPane);
+		cardPanel.addTab("Stats", statsPane);
 		frame.add(cardPanel);
 		frame.setVisible(true);
 		

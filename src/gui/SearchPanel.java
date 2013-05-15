@@ -35,6 +35,7 @@ public class SearchPanel extends JPanel{
 	private NextButton nextButton;
 	private PreviousButton previousButton;
 	private CardDisplayPanel cardDisplayPanel;
+	private JPanel menu;
 	
 	public SearchPanel(XMLParser parser, DeckPanel deck) throws ParserConfigurationException, SAXException, IOException{
 		super(new BorderLayout());
@@ -42,7 +43,7 @@ public class SearchPanel extends JPanel{
 		this.parser = parser;
 		this.setBorder(BorderFactory.createLineBorder(Color.black));
 		this.cardDisplayPanel = new CardDisplayPanel();
-		JPanel menuButtonPanel = new JPanel();
+		this.menu = new JPanel();
 		this.nextButton = new NextButton(MTGDeckMain.messages.getString("Next"), cardDisplayPanel);
 		this.previousButton = new PreviousButton(MTGDeckMain.messages.getString("Previous"), cardDisplayPanel);
 		SearchButton searchButton = new SearchButton(MTGDeckMain.messages.getString("SearchButton1"), cardDisplayPanel, this.parser);
@@ -50,13 +51,29 @@ public class SearchPanel extends JPanel{
 		this.add(cardDisplayPanel, BorderLayout.CENTER);
 		this.add(nextButton, BorderLayout.LINE_END);
 		this.add(previousButton, BorderLayout.LINE_START);
-		menuButtonPanel.add(searchButton);
-		menuButtonPanel.add(addResultButton);
-		this.add(menuButtonPanel, BorderLayout.PAGE_START);
+		this.menu.add(searchButton);
+		this.menu.add(addResultButton);
+		this.add(this.menu, BorderLayout.PAGE_START);
 	}
 	
 	public Dimension getPrefferedSize() {
 		return new Dimension(800,600);
+	}
+	
+	public void reSet() throws ParserConfigurationException, SAXException, IOException{
+		this.removeAll();
+		this.menu.removeAll();
+		this.nextButton = new NextButton(MTGDeckMain.messages.getString("Next"), cardDisplayPanel);
+		this.previousButton = new PreviousButton(MTGDeckMain.messages.getString("Previous"), cardDisplayPanel);
+		SearchButton searchButton = new SearchButton(MTGDeckMain.messages.getString("SearchButton1"), cardDisplayPanel, this.parser);
+		AddResultButton addResultButton = new AddResultButton(MTGDeckMain.messages.getString("Add"), cardDisplayPanel, deck);
+		this.add(cardDisplayPanel, BorderLayout.CENTER);
+		this.add(nextButton, BorderLayout.LINE_END);
+		this.add(previousButton, BorderLayout.LINE_START);
+		this.menu.add(searchButton);
+		this.menu.add(addResultButton);
+		this.add(this.menu, BorderLayout.PAGE_START);
+		this.repaint();
 	}
 	
 	public void paintComponent(Graphics g) {
