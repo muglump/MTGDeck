@@ -47,7 +47,7 @@ public class SearchPanel extends JPanel{
 		this.nextButton = new NextButton(MTGDeckMain.messages.getString("Next"), cardDisplayPanel);
 		this.previousButton = new PreviousButton(MTGDeckMain.messages.getString("Previous"), cardDisplayPanel);
 		SearchButton searchButton = new SearchButton(MTGDeckMain.messages.getString("SearchButton1"), cardDisplayPanel, this.parser);
-		AddResultButton addResultButton = new AddResultButton("Add This Card", cardDisplayPanel, deck);
+		AddResultButton addResultButton = new AddResultButton(MTGDeckMain.messages.getString("Add"), cardDisplayPanel, deck);
 		this.add(cardDisplayPanel, BorderLayout.CENTER);
 		this.add(nextButton, BorderLayout.LINE_END);
 		this.add(previousButton, BorderLayout.LINE_START);

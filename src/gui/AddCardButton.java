@@ -40,12 +40,12 @@ public class AddCardButton extends JButton implements ActionListener{
 			try{
 				this.deckPane.getDeck().addCardToDeck(card);
 			}catch(CardNotInRulesetException e){
-				JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("This card is not allowed in selected ruleset"));
+				JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("RuleVio"));
 			}
 		}
 		this.cardDisplay.setListOfCards(this.deckPane.getDeck().cards);
 		//Gets menu button panel's parent, which is deck panel which we want to repaint
-		JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Added successfully"));
+		JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Added"));
 		this.getParent().getParent().repaint();
 	}
 

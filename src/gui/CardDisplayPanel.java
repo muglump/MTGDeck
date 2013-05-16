@@ -47,6 +47,7 @@ public class CardDisplayPanel extends JPanel {
 		g.drawString("Cost:", 400, 70);
 		g.drawString("Sets:", 60, 120);
 		g.drawString("P/T:", 400, 600);
+		g.drawString("Pos:", 400, 670);
 	}
 	
 	private void drawlistOfCards(Graphics g) {
@@ -57,6 +58,7 @@ public class CardDisplayPanel extends JPanel {
 			String sets = this.listOfCards.get(this.currentCardIndex).sets;
 			String cost = this.listOfCards.get(this.currentCardIndex).castingCost;
 			String pt = this.listOfCards.get(this.currentCardIndex).power + "/" + this.listOfCards.get(this.currentCardIndex).toughness;
+			String count = this.currentCardIndex + 1 + " / " + this.listOfCards.size();
 			this.rulesArea.setText(rules);
 			g.drawString(name, 100, 70);
 			g.drawString(type, 90, 90);
@@ -64,6 +66,7 @@ public class CardDisplayPanel extends JPanel {
 			drawSets(g, sets, 90, 120);
 			g.drawString(cost, 440, 70);
 			g.drawString(pt, 440, 600);
+			g.drawString(count, 440, 670);
 		}
 	}
 
@@ -112,6 +115,10 @@ public class CardDisplayPanel extends JPanel {
 	public boolean noMoreToTheLeft(){
 		return this.currentCardIndex==0;
 		
+	}
+	
+	public void cleartext(){
+		rulesArea.setText(" ");
 	}
 	
 }

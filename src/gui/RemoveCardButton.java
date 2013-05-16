@@ -32,7 +32,8 @@ public class RemoveCardButton extends JButton implements ActionListener {
 				this.cardDisplay.shiftCardIndex(-1);
 			}
 			this.cardDisplay.setListOfCards(this.deckPanel.getDeck().cards);
-			JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("RemoveCard"));
+			JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("removecompletion1"));
+			cardDisplay.cleartext();
 			this.getParent().getParent().repaint();
 		}
 	}

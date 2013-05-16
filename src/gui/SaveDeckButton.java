@@ -33,7 +33,7 @@ public class SaveDeckButton extends JButton implements ActionListener{
 		if(rv==JFileChooser.APPROVE_OPTION){
 			File saveFile = fc.getSelectedFile();
 			UserInteraction.saveDeck(this.deck, saveFile);
-			JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("SaveDeck"));
+			JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("deckcommands6"));
 		}
 		
 		

@@ -61,7 +61,7 @@ public class EnglishButton extends JButton implements ActionListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Language"));
+		JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("English"));
 		this.cardDisplayPanel.repaint();
 	}
 }

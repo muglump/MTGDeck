@@ -40,8 +40,9 @@ public class AddResultButton extends JButton implements ActionListener{
 			}
 		}
 		else{
-			JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("No Results"));
+			JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("searchresultsnull"));
 		}
+		JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Added"));
 		this.deckPanel.getCardDisplay().setListOfCards(this.deckPanel.getDeck().cards);
 		this.deckPanel.repaint();
 	}
