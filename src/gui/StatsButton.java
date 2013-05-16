@@ -29,8 +29,8 @@ public class StatsButton extends JButton implements ActionListener {
 		ArrayList<String> stats = theDeck2.statistics();
 		String stat = MTGDeckMain.messages.getString("stats0");
 		stat = stat.concat(" \n ");
-		for(int i = 1; i < stats.size(); i++){
-			stat = stat.concat(MTGDeckMain.messages.getString("stats" + i) + " " + stats.get(i));
+		for(int i = 1; i <= stats.size(); i++){
+			stat = stat.concat(MTGDeckMain.messages.getString("stats" + i) + " " + stats.get(i-1));
 			stat = stat.concat(" \n ");
 		}
 		

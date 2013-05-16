@@ -98,7 +98,7 @@ public class Deck {
 		String plainCount = (String) String.valueOf(getLCount("Plains"));
 		String islandCount = (String) String.valueOf(getLCount("Island"));
 		String mountainCount = (String) String.valueOf(getLCount("Mountain"));
-		String temp = (String) String.valueOf(getTypeCount("Land") + (getLCount("Forest") + getLCount("Swamp") + getLCount("Plain") + getLCount("Island") + getLCount("Mountain")));
+		String temp = (String) String.valueOf(getTypeCount("Land") - (getLCount("Forest") + getLCount("Swamp") + getLCount("Plain") + getLCount("Island") + getLCount("Mountain")));
 		String otherCount = "";
 		if((Integer) Integer.valueOf(temp) > 0){
 			otherCount = temp;

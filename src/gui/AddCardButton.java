@@ -46,7 +46,7 @@ public class AddCardButton extends JButton implements ActionListener{
 		for(int i = 0; i < num.intValue(); i++){
 			try{
 				this.deckPane.getDeck().addCardToDeck(card);
-				JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Added"));
+			//	JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Added"));
 			}catch(CardNotInRulesetException e){
 				JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("RuleVio"));
 			}

@@ -18,7 +18,7 @@ import org.xml.sax.SAXException;
 
 
 public class XMLParser {
-	Document doc;
+	private Document doc;
 	
 	
 	public XMLParser() throws ParserConfigurationException, SAXException, IOException{
