@@ -21,7 +21,6 @@ public class NextButton extends JButton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		this.cardDisplay.shiftCardIndex(1);
-		JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Next"));
 		this.getParent().repaint();
 	}
 

@@ -136,7 +136,6 @@ public class DeckPanel extends JPanel implements ActionListener{
 		} catch (CardNotInRulesetException e) {
 			JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("InvDeck"));
 		}
-		JOptionPane.showMessageDialog(this, "The Panel displayed" );
 		this.repaint();
 		
 	}

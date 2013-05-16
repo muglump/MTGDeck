@@ -34,6 +34,7 @@ public class AddResultButton extends JButton implements ActionListener{
 			for(int i=0; i<number; i++){
 				try{
 					this.deckPanel.addCardToDeck(this.cardDisplay.getCurrentCard());
+					JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Added"));
 				}catch(CardNotInRulesetException e){
 					JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("RuleVio"));
 				}
@@ -42,7 +43,6 @@ public class AddResultButton extends JButton implements ActionListener{
 		else{
 			JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("searchresultsnull"));
 		}
-		JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Added"));
 		this.deckPanel.getCardDisplay().setListOfCards(this.deckPanel.getDeck().cards);
 		this.deckPanel.repaint();
 	}

@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.xml.sax.SAXException;
 
@@ -34,18 +35,24 @@ public class AddCardButton extends JButton implements ActionListener{
 		
 		String name = JOptionPane.showInputDialog(MTGDeckMain.messages.getString("GUISearch1"));
 		String number = JOptionPane.showInputDialog(MTGDeckMain.messages.getString("GUISearch2"));
-		MTGCard card = this.parser.searchForCardName(name);
+		MTGCard card;
+		try {
+			card = this.parser.searchForCardName(name);
+		} catch (XPathExpressionException e1) {
+			JOptionPane.showMessageDialog(this, e1.getMessage());
+			return;
+		}
 		Integer num = Integer.parseInt(number);
 		for(int i = 0; i < num.intValue(); i++){
 			try{
 				this.deckPane.getDeck().addCardToDeck(card);
+				JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Added"));
 			}catch(CardNotInRulesetException e){
 				JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("RuleVio"));
 			}
 		}
 		this.cardDisplay.setListOfCards(this.deckPane.getDeck().cards);
 		//Gets menu button panel's parent, which is deck panel which we want to repaint
-		JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Added"));
 		this.getParent().getParent().repaint();
 	}
 

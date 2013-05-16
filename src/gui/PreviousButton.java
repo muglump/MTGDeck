@@ -21,7 +21,6 @@ public class PreviousButton extends JButton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.cardDisplay.shiftCardIndex(-1);
-		JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Previous"));
 		this.getParent().repaint();
 	}
 	

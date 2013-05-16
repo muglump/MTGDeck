@@ -30,13 +30,12 @@ public class XMLParser {
 		
 	}
 	
-	public MTGCard searchForCardName(String cardName) {
+	public MTGCard searchForCardName(String cardName) throws XPathExpressionException {
 		String query = buildXPathQuery("name", cardName);
 		ArrayList<MTGCard> listOfCards = searchXML(query);
 		
 		if(listOfCards.isEmpty()){
-			MTGCard card = new MTGCard("Empty", "Empty", "Empty", "Empty", "Empty", "Empty", "Empty");
-			return card;
+			throw new XPathExpressionException("Name not found");
 		}
 		return listOfCards.get(0);
 		
