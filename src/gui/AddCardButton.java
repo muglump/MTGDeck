@@ -45,6 +45,7 @@ public class AddCardButton extends JButton implements ActionListener{
 		}
 		this.cardDisplay.setListOfCards(this.deckPane.getDeck().cards);
 		//Gets menu button panel's parent, which is deck panel which we want to repaint
+		JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Added successfully"));
 		this.getParent().getParent().repaint();
 	}
 

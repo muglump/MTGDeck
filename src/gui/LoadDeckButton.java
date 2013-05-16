@@ -6,8 +6,10 @@ import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import deck.Deck;
+import deck.MTGDeckMain;
 import deck.UserInteraction;
 import deck.XMLParser;
 
@@ -34,6 +36,7 @@ public class LoadDeckButton extends JButton implements ActionListener{
 			File loadFile = fc.getSelectedFile();
 			this.deck.setDeck(UserInteraction.loadDeck(loadFile,  this.parser));
 			this.cardDisplayPanel.setListOfCards(this.deck.getDeck().cards);
+			JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("DeckLoaded"));
 			this.getParent().getParent().repaint();
 		}
 	}

@@ -37,6 +37,7 @@ public class SearchButton extends JButton implements ActionListener {
 			String query = this.parser.buildXPathQuery(type.toLowerCase(), term);
 			this.results = this.parser.searchXML(query);
 			this.cardDisplay.setListOfCards(this.results);
+			JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("SearchDone"));
 			this.getParent().getParent().repaint();
 	}
 	

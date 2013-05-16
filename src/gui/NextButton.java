@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
+import deck.MTGDeckMain;
 
 public class NextButton extends JButton implements ActionListener {
 
@@ -18,6 +21,7 @@ public class NextButton extends JButton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		this.cardDisplay.shiftCardIndex(1);
+		JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Next"));
 		this.getParent().repaint();
 	}
 

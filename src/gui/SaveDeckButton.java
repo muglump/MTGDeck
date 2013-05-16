@@ -8,8 +8,10 @@ import java.io.FileOutputStream;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import deck.Deck;
+import deck.MTGDeckMain;
 import deck.UserInteraction;
 
 public class SaveDeckButton extends JButton implements ActionListener{
@@ -31,6 +33,7 @@ public class SaveDeckButton extends JButton implements ActionListener{
 		if(rv==JFileChooser.APPROVE_OPTION){
 			File saveFile = fc.getSelectedFile();
 			UserInteraction.saveDeck(this.deck, saveFile);
+			JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("SaveDeck"));
 		}
 		
 		

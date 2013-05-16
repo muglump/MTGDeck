@@ -113,6 +113,10 @@ public class DeckPanel extends JPanel implements ActionListener{
 	public void setDeck(Deck deck){
 		this.deck = deck;
 	}
+	
+	public int cardsInDeck(){
+		return this.deck.cards.size();
+	}
 
 	public void addCardToDeck(MTGCard currentCard) throws CardNotInRulesetException {
 		// TODO Auto-generated method stub
@@ -132,6 +136,7 @@ public class DeckPanel extends JPanel implements ActionListener{
 		} catch (CardNotInRulesetException e) {
 			JOptionPane.showMessageDialog(this, MTGDeckMain.messages.getString("InvDeck"));
 		}
+		JOptionPane.showMessageDialog(this, "The Panel displayed" );
 		this.repaint();
 		
 	}

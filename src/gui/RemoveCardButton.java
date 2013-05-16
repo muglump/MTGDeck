@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
+import deck.MTGDeckMain;
 
 public class RemoveCardButton extends JButton implements ActionListener {
 
@@ -29,6 +32,7 @@ public class RemoveCardButton extends JButton implements ActionListener {
 				this.cardDisplay.shiftCardIndex(-1);
 			}
 			this.cardDisplay.setListOfCards(this.deckPanel.getDeck().cards);
+			JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("RemoveCard"));
 			this.getParent().getParent().repaint();
 		}
 	}

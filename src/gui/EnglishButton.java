@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -60,6 +61,7 @@ public class EnglishButton extends JButton implements ActionListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("Language"));
 		this.cardDisplayPanel.repaint();
 	}
 }
