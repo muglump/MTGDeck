@@ -32,6 +32,7 @@ public class SearchButton extends JButton implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
+			try{
 			String type = JOptionPane.showInputDialog(MTGDeckMain.messages.getString("SearchButton2"));
 			String term = JOptionPane.showInputDialog(MTGDeckMain.messages.getString("SearchButton3"));
 			String query = this.parser.buildXPathQuery(type.toLowerCase(), term);
@@ -39,6 +40,9 @@ public class SearchButton extends JButton implements ActionListener {
 			this.cardDisplay.setListOfCards(this.results);
 			JOptionPane.showMessageDialog(this,  MTGDeckMain.messages.getString("SearchComplete"));
 			this.getParent().getParent().repaint();
+			} catch (NullPointerException e1) {
+				e1.printStackTrace();
+			}
 	}
 	
 }
