@@ -43,6 +43,7 @@ public class DeckPanel extends JPanel implements ActionListener{
 		AddCardButton addButton = new AddCardButton(MTGDeckMain.messages.getString("Add"), cardDisplay, this.parser, this);
 		SaveDeckButton saveButton = new SaveDeckButton(MTGDeckMain.messages.getString("deckcommands6"), this.deck);
 		LoadDeckButton loadButton = new LoadDeckButton(MTGDeckMain.messages.getString("deckcommands7"), this, this.parser, cardDisplay);
+		NumberinDeckButton numberButton = new NumberinDeckButton(MTGDeckMain.messages.getString("deckcommands8"), this.deck);
 		RemoveCardButton removeButton = new RemoveCardButton(MTGDeckMain.messages.getString("deckcommands5"), this, cardDisplay);
 		JComboBox deckRulesetBox = new JComboBox(this.rulesetStrings);
 		deckRulesetBox.addActionListener(this);
@@ -53,6 +54,7 @@ public class DeckPanel extends JPanel implements ActionListener{
 		this.menu.add(removeButton);
 		this.menu.add(saveButton);
 		this.menu.add(loadButton);
+		this.menu.add(numberButton);
 		this.menu.add(deckRulesetBox);
 		this.add(this.menu, BorderLayout.PAGE_START);
 		
@@ -66,6 +68,7 @@ public class DeckPanel extends JPanel implements ActionListener{
 		AddCardButton addButton = new AddCardButton(MTGDeckMain.messages.getString("Add"), this.cardDisplayPanel, this.parser, this);
 		SaveDeckButton saveButton = new SaveDeckButton(MTGDeckMain.messages.getString("deckcommands6"), this.deck);
 		LoadDeckButton loadButton = new LoadDeckButton(MTGDeckMain.messages.getString("deckcommands7"), this, this.parser, this.cardDisplayPanel);
+		NumberinDeckButton numberButton = new NumberinDeckButton(MTGDeckMain.messages.getString("deckcommands10"), this.deck);
 		RemoveCardButton removeButton = new RemoveCardButton(MTGDeckMain.messages.getString("deckcommands5"), this, this.cardDisplayPanel);
 		JComboBox deckRulesetBox = new JComboBox(this.rulesetStrings);
 		deckRulesetBox.addActionListener(this);
@@ -76,6 +79,7 @@ public class DeckPanel extends JPanel implements ActionListener{
 		this.menu.add(removeButton);
 		this.menu.add(saveButton);
 		this.menu.add(loadButton);
+		this.menu.add(numberButton);
 		this.menu.add(deckRulesetBox);
 		this.add(this.menu, BorderLayout.PAGE_START);
 		this.repaint();
