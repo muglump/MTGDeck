@@ -38,10 +38,10 @@ public class MTGDeckMain {
 		LanugaugePanel langPane = new LanugaugePanel(deckPane, searchPane, theDeck);
 		StatsPanel statsPane = new StatsPanel(theDeck);
 		JTabbedPane cardPanel = new JTabbedPane();
-		cardPanel.addTab("Language", langPane);
-		cardPanel.addTab("Deck", deckPane);
-		cardPanel.addTab("Search", searchPane);
-		cardPanel.addTab("Stats", statsPane);
+		cardPanel.addTab(messages.getString("Language"), langPane);
+		cardPanel.addTab(messages.getString("Deck"), deckPane);
+		cardPanel.addTab(messages.getString("Search"), searchPane);
+		cardPanel.addTab(messages.getString("Stats"), statsPane);
 		frame.add(cardPanel);
 		frame.setVisible(true);
 		

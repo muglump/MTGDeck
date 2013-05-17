@@ -43,7 +43,7 @@ public class DeckPanel extends JPanel implements ActionListener{
 		AddCardButton addButton = new AddCardButton(MTGDeckMain.messages.getString("Add"), cardDisplay, this.parser, this);
 		SaveDeckButton saveButton = new SaveDeckButton(MTGDeckMain.messages.getString("deckcommands6"), this.deck);
 		LoadDeckButton loadButton = new LoadDeckButton(MTGDeckMain.messages.getString("deckcommands7"), this, this.parser, cardDisplay);
-		NumberinDeckButton numberButton = new NumberinDeckButton(MTGDeckMain.messages.getString("deckcommands8"), this.deck);
+		NumberinDeckButton numberButton = new NumberinDeckButton(MTGDeckMain.messages.getString("deckcommands10"), this.deck);
 		RemoveCardButton removeButton = new RemoveCardButton(MTGDeckMain.messages.getString("deckcommands5"), this, cardDisplay);
 		JComboBox deckRulesetBox = new JComboBox(this.rulesetStrings);
 		deckRulesetBox.addActionListener(this);
